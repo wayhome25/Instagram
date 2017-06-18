@@ -10,7 +10,7 @@
   <li>username : {{ user.username }}</li>
   <li>email : {{ user.email }}</li>
   <li>nickname : {{ user.profile.nickname }}</li>
-  <li><a href="#">비밀번호 변경</a></li>
+  <li><a href="{% url "password_change" %}">비밀번호 변경</a></li>
 </ul>
 
 {% endblock %}

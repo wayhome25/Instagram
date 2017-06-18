@@ -22,7 +22,7 @@ class SignupForm(UserCreationForm):
         email = self.cleaned_data.get('email')
         User = get_user_model()
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('사용중인 이메일 입니다.') # NOTE: 유효성 검사 에러메시지 생성 
+            raise forms.ValidationError('사용중인 이메일 입니다.') # NOTE: 유효성 검사 에러메시지 생성
         return email
 
     def save(self):
