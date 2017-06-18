@@ -1,3 +1,10 @@
+{% extends "accounts/layout.html" %}
+
+{% block title %}
+로그인 | Instagram
+{% endblock %}
+
+{% block content %}
 <h3>로그인</h3>
 <form action="" method="post">
   {% csrf_token %}
@@ -6,3 +13,4 @@
   </table>
   <input type="submit">
 </form>
+{% endblock %}
