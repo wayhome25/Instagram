@@ -1,0 +1,16 @@
+{% extends "accounts/layout.html" %}
+
+{% block title %}
+프로필 | Instagram
+{% endblock %}
+
+{% block content %}
+<h3>{{ user.profile.nickname }}'s 프로필</h3>
+<ul>
+  <li>username : {{ user.username }}</li>
+  <li>email : {{ user.email }}</li>
+  <li>nickname : {{ user.profile.nickname }}</li>
+  <li><a href="#">비밀번호 변경</a></li>
+</ul>
+
+{% endblock %}
