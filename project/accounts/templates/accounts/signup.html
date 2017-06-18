@@ -1,0 +1,16 @@
+{% extends "accounts/layout.html" %}
+
+{% block title %}
+회원가입 | Instagram
+{% endblock %}
+
+{% block content %}
+<h3>회원가입</h3>
+<form action="" method="post">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <input type="submit">
+</form>
+{% endblock %}
