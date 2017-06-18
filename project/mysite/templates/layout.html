@@ -5,6 +5,15 @@
     <title>{% block title %}Instagram{% endblock %}</title>
   </head>
   <body>
+  <div>
+    <a href="/">홈</a>
+    {% if user.is_authenticated %}
+    <a href="{% url "logout" %}">로그아웃</a>
+    {% else %}
+    <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
+    <a href="{% url "signup" %}">회원가입</a>
+    {% endif %}
+  </div>
   {% block content %}
   {% endblock %}
   </body>
