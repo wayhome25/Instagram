@@ -1,3 +1,8 @@
 Django==1.10
+django-appconf==1.0.2
 django-extensions==1.7.9
+django-imagekit==4.0.1
+olefile==0.44
+pilkit==2.0
+Pillow==4.1.1
 six==1.10.0
