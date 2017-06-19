@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.shortcuts import redirect
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^$', lambda r: redirect('profile'), name='root'), # NOTE: lambda 함수를 통한 리다이렉트
 ]
