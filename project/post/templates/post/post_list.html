@@ -1,13 +1,15 @@
 {% extends "post/layout.html" %}
+{% load humanize %}
+
 {% block content %}
 {% for post in post_list %}
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
   <li>{{ post.content }}</li>
-  <li>{{ post.created_at }}</li>
+  <li>{{ post.created_at|naturaltime }}</li>
   <li>{% for tag in post.tag_set.all %}
-  {{ tag.name }}  
+  {{ tag.name }}
   {% endfor %}</li>
 </ul>
 
