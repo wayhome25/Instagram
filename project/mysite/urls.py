@@ -29,3 +29,10 @@ urlpatterns = [
 
 # NOTE: serving media files uploaded by a user during development
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# NOTE: debug_toolbar용 url 설정
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
