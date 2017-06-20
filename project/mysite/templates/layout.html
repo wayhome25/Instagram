@@ -19,7 +19,12 @@
   {% block content %}
   {% endblock %}
 
-  {% block script %}
-  {% endblock %}
+  {% if messages %}
+  <script type="text/javascript">
+  {% for message in messages %}
+  alert("{{ message.message }}");
+  {% endfor %}
+  </script>
+  {% endif %}
   </body>
 </html>

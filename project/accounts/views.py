@@ -32,7 +32,7 @@ def password_change(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, '비밀번호가 정상적으로 변경되었습니다.')
-            return redirect('password_change')
+            return redirect('profile')
         else:
             messages.error(request, '오류가 발생하였습니다.')
     else:
