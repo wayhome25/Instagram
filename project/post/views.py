@@ -7,6 +7,7 @@ from .forms import PostForm
 
 def post_list(request):
     post_list = Post.objects.prefetch_related('tag_set').select_related('author__profile').all()
+
     return render(request, 'post/post_list.html', {
         'post_list': post_list,
     })
