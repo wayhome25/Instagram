@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^dojo/', include('dojo.urls', namespace='dojo')),
     url(r'post/', include('post.urls', namespace='post')),
-    url(r'^$', lambda r: redirect('profile'), name='root'), # NOTE: lambda 함수를 통한 리다이렉트
+    url(r'^$', lambda r: redirect('post:post_list'), name='root'), # NOTE: lambda 함수를 통한 리다이렉트
 ]
 
 # NOTE: serving media files uploaded by a user during development
