@@ -9,9 +9,7 @@
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
   <li>{{ post.content }}</li>
   <li>{{ post.created_at|naturaltime }}</li>
-  <li>{% for tag in post.tag_set.all %}
-  {{ tag.name }}
-  {% endfor %}</li>
+  <li>{% for tag in post.tag_set.all %} {{ tag.name }} {% endfor %}</li>
 </ul>
 {% endfor %}
 {% endblock %}
@@ -20,9 +18,12 @@
 {% block script %}
 {% if messages %}
 <script type="text/javascript">
-{% for message in messages
+{% for message in messages %}
 alert("{{ message.message }}");
 {% endfor %}
 </script>
+
+
+
 {% endif %}
 {% endblock %}
