@@ -43,3 +43,12 @@ def post_edit(request, pk):
     return render(request, 'post/post_form.html', {
         'form': form,
     })
+
+@login_required
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post.author != request.user:
+        return redirect('post:post_list')
+    else:
+        post.delete()
+        return redirect('post:post_list')
