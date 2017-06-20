@@ -16,6 +16,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            post.tag_save()
             return redirect('post:post_list')
 
     else:

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+import re
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -16,6 +17,17 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+    # NOTE: content에서 tags를 추출하여, Tag 객체 가져오기, 신규 태그는 Tag instance 생성, 본인의 tag_set에 등록,
+    def tag_save(self):
+        tags = re.findall(r'#\w+\b', self.content)
+
+        if not tags:
+            return
+        for t in tags:
+            tag, tag_created = Tag.objects.get_or_create(name=t)
+            if not self.tag_set.filter(id=tag.id).exists():
+                self.tag_set.add(tag) #NOTE: ManyToManyField 에 인스턴스 추가
 
 
 class Tag(models.Model):
