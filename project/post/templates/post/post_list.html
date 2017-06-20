@@ -5,6 +5,7 @@
 {% for post in post_list %}
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
+  <li><a href="{% url "post:post_edit" post.pk %}">수정</a> / <a href="">삭제</a></li>
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
   <li>{{ post.content }}</li>
   <li>{{ post.created_at|naturaltime }}</li>
