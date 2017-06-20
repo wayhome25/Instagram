@@ -11,12 +11,17 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = '__all__'
 
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'author', 'content', 'created_at']
-    list_display_links = ['author', 'content']
+    list_display = ['id', 'author', 'nickname', 'content', 'created_at']
+    list_display_links = ['author', 'nickname', 'content']
     form = PostForm
 
+    def nickname(request, post):
+        return post.author.profile.nickname
+
+    list_select_related = ['author__profile']
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
