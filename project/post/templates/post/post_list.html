@@ -13,6 +13,16 @@
   {{ tag.name }}
   {% endfor %}</li>
 </ul>
-
 {% endfor %}
+{% endblock %}
+
+
+{% block script %}
+{% if messages %}
+<script type="text/javascript">
+{% for message in messages
+alert("{{ message.message }}");
+{% endfor %}
+</script>
+{% endif %}
 {% endblock %}
