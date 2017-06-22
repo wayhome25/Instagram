@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block content %}
+{% if not post_list %}
+<p>"{{tag}}" 태그 검색 결과가 없습니다.</p>
+{% else %}
 {% for post in post_list %}
+<p>"{{tag}}" 태그 검색결과 </p>
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
   <li><a href="{% url "post:post_edit" post.pk %}">수정</a> / <a href="{% url "post:post_delete" post.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></li>
@@ -16,4 +20,5 @@
   <li>{% for tag in post.tag_set.all %} {{ tag.name }} {% endfor %}</li>
 </ul>
 {% endfor %}
+{% endif %}
 {% endblock %}
