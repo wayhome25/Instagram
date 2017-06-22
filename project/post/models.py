@@ -29,6 +29,9 @@ class Post(models.Model):
             if not self.tag_set.filter(id=tag.id).exists():
                 self.tag_set.add(tag) #NOTE: ManyToManyField 에 인스턴스 추가
 
+    def __str__(self):
+        return self.content
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=140, unique=True)

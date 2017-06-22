@@ -1,0 +1,19 @@
+{% extends "post/layout.html" %}
+{% load humanize %}
+
+{% block title %}
+  {{ tag }}-태그 검색결과
+{% endblock %}
+
+{% block content %}
+{% for post in post_list %}
+<ul>
+  <li>{{ post.author.profile.nickname }}</li>
+  <li><a href="{% url "post:post_edit" post.pk %}">수정</a> / <a href="{% url "post:post_delete" post.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></li>
+  <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
+  <li>{{ post.content }}</li>
+  <li>{{ post.created_at|naturaltime }}</li>
+  <li>{% for tag in post.tag_set.all %} {{ tag.name }} {% endfor %}</li>
+</ul>
+{% endfor %}
+{% endblock %}

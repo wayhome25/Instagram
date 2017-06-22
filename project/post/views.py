@@ -58,3 +58,11 @@ def post_delete(request, pk):
         post.delete()
         messages.success(request, '삭제완료')
         return redirect('post:post_list')
+
+def post_search(request, tag):
+    post_list = Post.objects.filter(tag_set__name__icontains=tag)
+    print(post_list)
+    return render(request, 'post/post_search.html', {
+        'tag': tag,
+        'post_list': post_list,
+    })
