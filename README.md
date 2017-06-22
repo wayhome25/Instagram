@@ -13,4 +13,5 @@
 > 구현 중 새롭게 알게된 것, 유용하다고 생각한 부분들을 블로그에 정리합니다.
 
 - [쿼리셋 수정을 통한 웹서비스 성능 개선](https://wayhome25.github.io/django/2017/06/20/selected_related_prefetch_related/)
+- [사용자 정의 필터 (Custom Template Filter)를 활용하여 해시태그 링크 구현하기](https://wayhome25.github.io/django/2017/06/22/custom-template-filter/)
 - [django-imagekit를 활용하여 유저가 업로드한 이미지를 수정](https://wayhome25.github.io/django/2017/05/11/image-thumbnail/)

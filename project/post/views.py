@@ -69,7 +69,7 @@ def post_delete(request, pk):
         return redirect('post:post_list')
 
 def post_search(request, tag):
-    post_list = Post.objects.filter(tag_set__name__icontains=tag).select_related('author__profile').prefetch_related('tag_set')
+    post_list = Post.objects.filter(tag_set__name__iexact=tag).select_related('author__profile').prefetch_related('tag_set')
     return render(request, 'post/post_list.html', {
         'tag': tag,
         'post_list': post_list,
