@@ -33,6 +33,10 @@ def post_new(request):
 @login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    if post.author != request.user:
+        messages.warning(request, '잘못된 접근입니다.')
+        return redirect('post:post_list')
+        
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
