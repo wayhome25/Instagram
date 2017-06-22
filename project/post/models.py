@@ -4,7 +4,6 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 import re
 
-from django.utils.safestring import mark_safe
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
