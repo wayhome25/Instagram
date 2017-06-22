@@ -9,15 +9,15 @@
 {% if not post_list %}
 <p>"{{tag}}" 태그 검색 결과가 없습니다.</p>
 {% else %}
-{% for post in post_list %}
 <p>"{{tag}}" 태그 검색결과 </p>
+<p>게시물 {{ post_list.count|intcomma }}개 </p>
+{% for post in post_list %}
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
   <li><a href="{% url "post:post_edit" post.pk %}">수정</a> / <a href="{% url "post:post_delete" post.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></li>
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
-  <li>{{ post.content }}</li>
+  <li>{{ post.content|linebreaksbr }}</li>
   <li>{{ post.created_at|naturaltime }}</li>
-  <li>{% for tag in post.tag_set.all %} {{ tag.name }} {% endfor %}</li>
 </ul>
 {% endfor %}
 {% endif %}

@@ -17,7 +17,7 @@
     {% endif %}
     <form action="{% url "post:post_list" %}" method="post">
       {% csrf_token %}
-      <input type="text" name="tag" placeholder="태그검색" required>
+      <input type="text" name="tag" placeholder="태그검색" pattern="#?[\wㄱ-ㅎ|ㅏ-ㅣ|가-힣]+" title="특수문자, 공백 입력불가" required >
       {# <input type="submit"> - input이 하나일 때는 별도의 submit 없이 엔터로 전송이 가능하다.#}
     </form>
   </div>
@@ -29,6 +29,8 @@
   {% for message in messages %}
   alert("{{ message.message }}");
   {% endfor %}
+
+
   </script>
   {% endif %}
   </body>
