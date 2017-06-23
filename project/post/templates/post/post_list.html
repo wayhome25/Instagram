@@ -24,6 +24,12 @@
   {% if post.author == user %}
   <li><a href="{% url "post:post_edit" post.pk %}">수정</a> / <a href="{% url "post:post_delete" post.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></li>
   {% endif %}
+  <li>
+    <a href="{% url "post:post_like" post.pk %}">{{ post.like_user_set.count }} like{{ post.like_user_set.count|pluralize }} </a>
+    {% for like_user in post.like_user_set.all %}
+      {{ like_user.profile.nickname }}
+    {% endfor %}
+  </li>
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
   {{ post|add_link|safe|linebreaksbr }}
   <li>{{ post.created_at|naturaltime }}</li>
