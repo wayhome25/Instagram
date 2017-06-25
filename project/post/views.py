@@ -1,6 +1,7 @@
 import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
@@ -10,6 +11,15 @@ from .forms import PostForm
 
 def post_list(request):
     post_list = Post.objects.prefetch_related('tag_set', 'like_user_set__profile').select_related('author__profile').all()
+    paginator = Paginator(post_list, 3)
+    page_num = request.GET.get('page')
+
+    try:
+        posts = paginator.page(page_num)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
 
     if request.method == 'POST' :
         tag = request.POST.get('tag')
@@ -17,7 +27,7 @@ def post_list(request):
         return redirect('post:post_search', tag_clean)
 
     return render(request, 'post/post_list.html', {
-        'post_list': post_list,
+        'posts': posts,
     })
 
 @login_required

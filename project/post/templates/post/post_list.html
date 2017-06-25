@@ -18,7 +18,7 @@
 {% endif %}
 {% endif %}
 
-{% for post in post_list %}
+{% for post in posts %}
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
   {% if post.author == user %}
@@ -38,6 +38,19 @@
   <li>{{ post.created_at|naturaltime }}</li>
 </ul>
 {% endfor %}
+
+
+<div class="pagination">
+  {% if posts.has_previous %}
+  <a href="?page={{ posts.previous_page_number }}">previous</a>
+  {% endif %}
+
+  Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+
+  {% if posts.has_next %}
+  <a href="?page={{ posts.next_page_number }}">next</a>
+  {% endif %}
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
