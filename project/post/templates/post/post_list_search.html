@@ -1,0 +1,60 @@
+{% extends "post/post_list.html" %}
+
+{% block extra_script %}
+<script type="text/javascript">
+
+// 무한스크롤 ajax
+  $('#callmorepost').click(function(){
+    var page = $("#page").val();
+    var end_page = {{ posts.paginator.num_pages }}
+    if(page > end_page){
+      return;
+    }
+    callMorePostAjax(page);
+    $("#page").val(parseInt(page)+1);
+  });
+
+  $(window).scroll(function(){
+    var scrollHeight = $(window).scrollTop() + $(window).height();
+    var documentHeight = $(document).height();
+
+    console.log("documentHeight:" + documentHeight);
+    console.log("windowHeight:" + $(window).height());
+    console.log("scrollHeight:" + scrollHeight);
+
+    if (scrollHeight  >= documentHeight){
+      var page = $("#page").val();
+      var end_page = {{ posts.paginator.num_pages }}
+      if(page > end_page){
+        return;
+      }
+      callMorePostAjax(page);
+      $("#page").val(parseInt(page)+1);
+    }
+  });
+
+  function callMorePostAjax(page) {
+    var end_page = {{ posts.paginator.num_pages }}
+    if(page > end_page){
+      return;
+    }
+    $.ajax({
+      type : 'POST',
+      url: "{% url 'post:post_search' tag %}",
+      data: {
+        'page': page,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      success: addMorePostAjax,
+      dataType: 'html',
+      error: function(request, status, error){
+        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+      },
+    });
+  }
+
+  function addMorePostAjax(data, textStatus, jqXHR) {
+    $('#post_list_ajax').append(data);
+  }
+</script>
+{% endblock %}
