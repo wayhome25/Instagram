@@ -5,7 +5,13 @@
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
   {% if post.author == user %}
-  <li><a href="{% url "post:post_edit" post.pk %}">수정</a> / <a href="{% url "post:post_delete" post.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></li>
+  <li><a href="{% url "post:post_edit" post.pk %}">수정</a></li>
+  <li>
+    <form action="{% url "post:post_delete" post.pk %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
+    </form>
+  </li>
   {% endif %}
   <li>
     <input type="button" class="like" name="{{ post.id }}" value="Like">
