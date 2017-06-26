@@ -45,6 +45,18 @@ Instagram
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
   {{ post|add_link|safe|linebreaksbr }}
   <li>{{ post.created_at|naturaltime }}</li>
+  {% for comment in post.comment_set.all %}
+  <li>{{ comment.author.profile.nickname }} : {{ comment.content }}</li>
+  {% endfor %}
+  <li>
+    <form action="{% url "post:comment_new" post.pk %}" method="post">
+      {% csrf_token %}
+      <table>
+      {{ comment_form.as_table }}
+      </table>
+      <input type="submit" value="댓글등록">
+    </form>
+  </li>
 </ul>
 <hr>
 {% endfor %}

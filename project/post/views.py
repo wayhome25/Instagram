@@ -5,12 +5,14 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
-from .models import Post, Like
-from .forms import PostForm
+from .models import Comment, Post, Like
+from .forms import CommentForm, PostForm
 
 
 def post_list(request):
-    post_list = Post.objects.prefetch_related('tag_set', 'like_user_set__profile').select_related('author__profile').all()
+    post_list = Post.objects.prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile').select_related('author__profile').all()
+    comment_form = CommentForm()
+
     paginator = Paginator(post_list, 3)
     page_num = request.POST.get('page')
 
@@ -22,9 +24,9 @@ def post_list(request):
         posts = paginator.page(paginator.num_pages)
 
     if request.is_ajax(): # Ajax request 여부 확인
-        print('ajax 동작!!')
         return render(request,'post/post_list_ajax.html',{
             'posts': posts,
+            'comment_form': comment_form,
         })
 
     if request.method == 'POST' :
@@ -34,6 +36,7 @@ def post_list(request):
 
     return render(request, 'post/post_list.html', {
         'posts': posts,
+        'comment_form': comment_form,
     })
 
 @login_required
@@ -132,3 +135,17 @@ def post_like(request):
                'nickname': request.user.profile.nickname }
 
     return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+@login_required
+def comment_new(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect("post:post_list")
+    return redirect("post:post_list")
