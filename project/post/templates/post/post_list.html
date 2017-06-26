@@ -46,8 +46,15 @@ Instagram
   {{ post|add_link|safe|linebreaksbr }}
   <li>{{ post.created_at|naturaltime }}</li>
   {% for comment in post.comment_set.all %}
-  <li>{{ comment.author.profile.nickname }} : {{ comment.content }}</li>
+  <li>{{ comment.author.profile.nickname }} : {{ comment.content }} </li>
+  {% if user == comment.author %}
+  <form action="{% url "post:comment_delete" post.pk comment.pk %}" method='post'>
+  {% csrf_token %}
+  <input type="submit" value="댓글삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
+  </form>
+  {% endif %}
   {% endfor %}
+  {% if user.is_authenticated %}
   <li>
     <form action="{% url "post:comment_new" post.pk %}" method="post">
       {% csrf_token %}
@@ -57,6 +64,7 @@ Instagram
       <input type="submit" value="댓글등록">
     </form>
   </li>
+  {% endif %}
 </ul>
 <hr>
 {% endfor %}

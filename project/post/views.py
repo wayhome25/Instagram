@@ -149,3 +149,15 @@ def comment_new(request, post_pk):
             comment.save()
             return redirect("post:post_list")
     return redirect("post:post_list")
+
+
+@login_required
+def comment_delete(request, post_pk, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST' and request.user == comment.author :
+        comment.delete()
+        messages.success(request, '삭제완료')
+        return redirect('post:post_list')
+
+    messages.warning(request, '잘못된 접근입니다.')
+    return redirect('post:post_list')
