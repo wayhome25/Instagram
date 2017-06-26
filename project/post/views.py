@@ -130,4 +130,4 @@ def post_like(request):
                'message': message,
                'nickname': request.user.profile.nickname }
 
-    return HttpResponse(json.dumps(context))
+    return HttpResponse(json.dumps(context), content_type="application/json")
