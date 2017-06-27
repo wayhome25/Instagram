@@ -29,7 +29,12 @@
   <div id="comment-list-ajax-post{{post.id}}"></div>
 
   {% for comment in post.comment_set.all %}
-  <li>{{ comment.author.profile.nickname }} : {{ comment.content }} </li>
+  <li id="comment{{ comment.id }}">
+    {{ comment.author.profile.nickname }} : {{ comment.content }}
+    {% if user == comment.author %}
+    <input type="button" class="del-comment" value="댓글삭제" name="{{ comment.id }}">
+    {% endif %}
+  </li>
   {% endfor %}
 
   {% if user.is_authenticated %}

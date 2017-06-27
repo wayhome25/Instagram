@@ -154,12 +154,16 @@ def comment_new(request):
 
 
 @login_required
-def comment_delete(request, post_pk, pk):
+def comment_delete(request):
+    pk = request.POST.get('pk')
     comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'POST' and request.user == comment.author :
         comment.delete()
-        messages.success(request, '삭제완료')
-        return redirect('post:post_list')
+        message = '삭제완료'
+        status = 1
 
-    messages.warning(request, '잘못된 접근입니다.')
-    return redirect('post:post_list')
+    else:
+        message = '잘못된 접근입니다.'
+        status = 0
+
+    return HttpResponse(json.dumps({'message': message, 'status': status, }), content_type="application/json")

@@ -49,13 +49,12 @@ Instagram
   <div id="comment-list-ajax-post{{post.id}}"></div>
 
   {% for comment in post.comment_set.all %}
-  <li>{{ comment.author.profile.nickname }} : {{ comment.content }} </li>
-  {% if user == comment.author %}
-  <form action="{% url "post:comment_delete" post.pk comment.pk %}" method='post'>
-  {% csrf_token %}
-  <input type="submit" value="댓글삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
-  </form>
-  {% endif %}
+  <li id="comment{{ comment.id }}">
+    {{ comment.author.profile.nickname }} : {{ comment.content }}
+    {% if user == comment.author %}
+    <input type="button" class="del-comment" value="댓글삭제" name="{{ comment.id }}">
+    {% endif %}
+  </li>
   {% endfor %}
 
   {% if user.is_authenticated %}
@@ -130,12 +129,42 @@ Instagram
         $("#add-comment-post"+pk+">input[type=text]").val("");
         $("#comment-list-ajax-post"+pk).append(data);
       },
-      error: function(response){
+      error: function(request, status, error){
         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         alert("문제가 발생했습니다.");
       },
     })
   })
+
+
+///////////////// 댓글삭제 Ajax /////////////////
+  $(document).on('click', '.del-comment', function(){
+    if(!confirm("정말 삭제하시겠습니까?")){
+      return
+    }
+    var pk = $(this).attr('name');
+    $.ajax({
+      type: "POST",
+      url: "{% url 'post:comment_delete' %}",
+      data: {
+        'pk': pk,
+        'csrfmiddlewaretoken': '{{ csrf_token }}',
+      },
+      dataType: "json",
+      success: function(response){
+        if(response.status){
+          $('#comment'+pk).remove();
+        }
+        alert(response.message);
+      },
+      error: function(request, status, error){
+        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        alert("문제가 발생했습니다.");
+      },
+    })
+  })
+
+
 </script>
 {% endblock %}
 
