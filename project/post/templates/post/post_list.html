@@ -46,16 +46,22 @@ Instagram
   {{ post|add_link|safe|linebreaksbr }}
   <li>{{ post.created_at|naturaltime }}</li>
 
+  {% if post.comment_set.all.count > 4 %}
+  <input type="button" class="comment-more" name="{{ post.id }}" value="***댓글 더보기***">
+  {% endif %}
   <div id="comment-list-ajax-post{{post.id}}"></div>
-
-  {% for comment in post.comment_set.all %}
-  <li id="comment{{ comment.id }}">
+  {% for comment in post.comment_set.all|slice:":4" %}
+  <div id="comment{{ comment.id }}">
+  <li>
     {{ comment.author.profile.nickname }} : {{ comment.content }}
     {% if user == comment.author %}
     <input type="button" class="del-comment" value="댓글삭제" name="{{ comment.id }}">
     {% endif %}
   </li>
+  </div>
   {% endfor %}
+  <div id="comment-more-{{post.id}}"></div>
+
 
   {% if user.is_authenticated %}
   <li id="add-comment-post{{post.id}}">
@@ -139,9 +145,6 @@ Instagram
 
 ///////////////// 댓글삭제 Ajax /////////////////
   $(document).on('click', '.del-comment', function(){
-    if(!confirm("정말 삭제하시겠습니까?")){
-      return
-    }
     var pk = $(this).attr('name');
     $.ajax({
       type: "POST",
@@ -157,6 +160,33 @@ Instagram
         }
         alert(response.message);
       },
+      error: function(request, status, error){
+        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        alert("문제가 발생했습니다.");
+      },
+    })
+  })
+
+
+///////////////// 댓글 더보기 Ajax /////////////////
+
+  $(document).on('click', '.comment-more', function(){
+    var pk = $(this).attr('name');
+
+    $.ajax({
+      type: "POST",
+      url: "{% url 'post:comment_more' %}",
+      data: {
+        'pk': pk,
+        'csrfmiddlewaretoken': '{{ csrf_token }}',
+      },
+      dataType: "html",
+
+      success: function(data, textStatus, jqXHR){
+        $("#comment-more-"+pk).append(data);
+        $(".comment-more[name="+pk+"]").remove()
+      },
+
       error: function(request, status, error){
         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         alert("문제가 발생했습니다.");

@@ -8,6 +8,7 @@ urlpatterns=[
     url(r'^(?P<pk>\d+)/delete/$', views.post_delete, name='post_delete'),
     url(r'^comment/new/$', views.comment_new, name='comment_new'),
     url(r'^comment/delete/$', views.comment_delete, name='comment_delete'),
+    url(r'^comment/more/$', views.comment_more, name='comment_more'),
     url(r'^explore/tags/(?P<tag>\w+)/$', views.post_search, name='post_search'),
     url(r'^like/$', views.post_like, name='post_like'),
 ]

@@ -167,3 +167,14 @@ def comment_delete(request):
         status = 0
 
     return HttpResponse(json.dumps({'message': message, 'status': status, }), content_type="application/json")
+
+
+def comment_more(request):
+    pk = request.POST.get('pk')
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        comments = post.comment_set.all()[4:]
+        return render(request, 'post/comment_more_ajax.html',{
+            'comments': comments,
+        })
+    return redirect("post:post_list")
