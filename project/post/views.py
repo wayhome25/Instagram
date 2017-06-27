@@ -105,7 +105,6 @@ def post_search(request, tag):
         posts = paginator.page(paginator.num_pages)
 
     if request.is_ajax(): # Ajax request 여부 확인
-        print('ajax 동작!!')
         return render(request,'post/post_list_ajax.html',{
             'posts': posts,
         })
@@ -138,8 +137,9 @@ def post_like(request):
 
 
 @login_required
-def comment_new(request, post_pk):
-    post = get_object_or_404(Post, pk=post_pk)
+def comment_new(request):
+    pk = request.POST.get('pk')
+    post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -147,7 +147,9 @@ def comment_new(request, post_pk):
             comment.author = request.user
             comment.post = post
             comment.save()
-            return redirect("post:post_list")
+            return render(request, 'post/comment_new_ajax.html',{
+                'comment': comment,
+            })
     return redirect("post:post_list")
 
 

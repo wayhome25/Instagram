@@ -25,5 +25,19 @@
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
   {{ post|add_link|safe|linebreaksbr }}
   <li>{{ post.created_at|naturaltime }}</li>
+
+  <div id="comment-list-ajax-post{{post.id}}"></div>
+
+  {% for comment in post.comment_set.all %}
+  <li>{{ comment.author.profile.nickname }} : {{ comment.content }} </li>
+  {% endfor %}
+
+  {% if user.is_authenticated %}
+  <li id="add-comment-post{{post.id}}">
+      {{ comment_form }}
+      <input type="button" class="add-comment" name="{{ post.id }}" value="댓글등록">
+  </li>
+  {% endif %}
 </ul>
+<hr>
 {% endfor %}

@@ -45,6 +45,9 @@ Instagram
   <li><img src="{{ post.photo.url }}" alt="{{ post.author }}'s photo"></li>
   {{ post|add_link|safe|linebreaksbr }}
   <li>{{ post.created_at|naturaltime }}</li>
+
+  <div id="comment-list-ajax-post{{post.id}}"></div>
+
   {% for comment in post.comment_set.all %}
   <li>{{ comment.author.profile.nickname }} : {{ comment.content }} </li>
   {% if user == comment.author %}
@@ -54,15 +57,11 @@ Instagram
   </form>
   {% endif %}
   {% endfor %}
+
   {% if user.is_authenticated %}
-  <li>
-    <form action="{% url "post:comment_new" post.pk %}" method="post">
-      {% csrf_token %}
-      <table>
-      {{ comment_form.as_table }}
-      </table>
-      <input type="submit" value="댓글등록">
-    </form>
+  <li id="add-comment-post{{post.id}}">
+      {{ comment_form }}
+      <input type="button" class="add-comment" name="{{ post.id }}" value="댓글등록">
   </li>
   {% endif %}
 </ul>
@@ -75,7 +74,7 @@ Instagram
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-// 좋아요 Ajax
+///////////////// 좋아요 Ajax /////////////////
     $(document).on('click', '.like', function(){
     var pk = $(this).attr('name')
     $.ajax({ // .like 버튼을 클릭하면 <새로고침> 없이 ajax로 서버와 통신하겠다.
@@ -106,13 +105,44 @@ Instagram
       },
     });
   })
+
+///////////////// 댓글등록 Ajax /////////////////
+
+  $(document).on('click', '.add-comment', function(){
+    var pk = $(this).attr('name');
+    var content = $("#add-comment-post"+pk+">input[type=text]").val();
+    if(content.length > 140){
+      alert("댓글은 최대 140자 입력 가능합니다. 현재 글자수 :"+content.length)
+      return;
+    }
+    $.ajax({
+      type: "POST",
+      url: "{% url 'post:comment_new' %}",
+      data: {
+        'pk': pk,
+        'content':content,
+        'csrfmiddlewaretoken': '{{ csrf_token }}',
+      },
+      dataType: "html",
+
+      success: function(data, textStatus, jqXHR){
+        alert("댓글을 추가하였습니다.");
+        $("#add-comment-post"+pk+">input[type=text]").val("");
+        $("#comment-list-ajax-post"+pk).append(data);
+      },
+      error: function(response){
+        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        alert("문제가 발생했습니다.");
+      },
+    })
+  })
 </script>
 {% endblock %}
 
 {% block extra_script %}
 <script type="text/javascript">
 
-// 무한스크롤 ajax
+///////////////// 무한 스크롤 Ajax /////////////////
   $('#callmorepost').click(function(){
     var page = $("#page").val();
     var end_page = {{ posts.paginator.num_pages }}
@@ -164,7 +194,7 @@ Instagram
   }
 
   function addMorePostAjax(data, textStatus, jqXHR) {
-    $('#post_list_ajax').append(data).trigger("create");;
+    $('#post_list_ajax').append(data);
   }
 </script>
 {% endblock %}
