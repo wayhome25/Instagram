@@ -24,6 +24,10 @@ Instagram
 {% for post in posts %}
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
+  <form action="{% url "follow" post.author.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="팔로우">
+  </form>
   {% if post.author == user %}
   <li><a href="{% url "post:post_edit" post.pk %}">수정</a></li>
   <li>
