@@ -55,6 +55,10 @@ class Like(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = (
+            ('user', 'post')
+        )
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)

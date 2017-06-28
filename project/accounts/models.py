@@ -30,3 +30,8 @@ class Relation(models.Model):
 
     def __str__(self):
         return "{} -> {}".format(self.from_user, self.to_user)
+
+    class Meta:
+        unique_together = (
+            ('from_user', 'to_user')
+        )
