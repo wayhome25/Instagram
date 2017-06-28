@@ -28,6 +28,10 @@ Instagram
     {% csrf_token %}
     <input type="submit" value="팔로우">
   </form>
+  팔로워 :
+  {% for follower in post.author.profile.get_follower %}
+    {{ follower.nickname }}
+  {% endfor %}
   {% if post.author == user %}
   <li><a href="{% url "post:post_edit" post.pk %}">수정</a></li>
   <li>

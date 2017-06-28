@@ -12,6 +12,10 @@
     <a href="{% url "profile" %}">{{ user.profile.nickname }}</a>
     <a href="{% url "post:post_new" %}">글쓰기</a>
     <a href="{% url "logout" %}">로그아웃</a>
+    팔로잉 :
+    {% for following in user.profile.get_following %}
+      {{ following.nickname }}
+    {% endfor %}
     {% else %}
     <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
     <a href="{% url "signup" %}">회원가입</a>

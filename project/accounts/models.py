@@ -14,10 +14,18 @@ class Profile(models.Model):
     def __str__(self):
         return self.nickname
 
+    @property
+    def get_follower(self):
+        return [i.from_user for i in self.follower_user.all()]
+
+    @property
+    def get_following(self):
+        return [i.to_user for i in self.follow_user.all()]
+
 
 class Relation(models.Model):
-    from_user = models.ForeignKey(Profile, related_name='follower_user')
-    to_user = models.ForeignKey(Profile, related_name='follow_user')
+    from_user = models.ForeignKey(Profile, related_name='follow_user')
+    to_user = models.ForeignKey(Profile, related_name='follower_user')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
