@@ -73,6 +73,7 @@ def post_edit(request, pk):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save()
+            post.tag_set.clear() #NOTE: ManyToManyField 의 모든 항목 삭제 (해당 인스턴스 내에서만 적용)
             post.tag_save()
             messages.success(request, '수정완료')
             return redirect('post:post_list')

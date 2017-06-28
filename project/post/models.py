@@ -30,8 +30,6 @@ class Post(models.Model):
         if not tags:
             return
 
-        self.tag_set.clear() #NOTE: ManyToManyField 의 모든 항목 삭제 (해당 인스턴스 내에서만 적용)
-
         for t in tags:
             tag, tag_created = Tag.objects.get_or_create(name=t)
             self.tag_set.add(tag) #NOTE: ManyToManyField 에 인스턴스 추가
