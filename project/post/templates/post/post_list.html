@@ -17,7 +17,7 @@ Instagram
 <p>"#{{tag}}" 태그 검색 결과가 없습니다.</p>
 {% else %}
 <p>"#{{tag}}" 태그 검색결과 </p>
-<p>게시물 {{ paginator.count|intcomma }}개 </p>
+<p>게시물 {{ posts.paginator.count|intcomma }}개 </p>
 {% endif %}
 {% endif %}
 
@@ -238,7 +238,11 @@ Instagram
     }
     $.ajax({
       type : 'POST',
+      {% if tag %}
+      url: "{% url 'post:post_search' tag %}", // tag 여부에 따라서 분기처리
+      {% else %}
       url: "{% url 'post:post_list' %}",
+      {% endif %}
       data: {
         'page': page,
         'csrfmiddlewaretoken': '{{ csrf_token }}'

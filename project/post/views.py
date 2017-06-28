@@ -9,8 +9,12 @@ from .models import Comment, Post, Like
 from .forms import CommentForm, PostForm
 
 
-def post_list(request):
-    post_list = Post.objects.prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile').select_related('author__profile').all()
+def post_list(request, tag=None):
+    if tag:
+        post_list = Post.objects.filter(tag_set__name__iexact=tag).select_related('author__profile').prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile')
+    else:
+        post_list = Post.objects.prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile').select_related('author__profile').all()
+
     comment_form = CommentForm()
 
     paginator = Paginator(post_list, 3)
@@ -35,6 +39,7 @@ def post_list(request):
         return redirect('post:post_search', tag_clean)
 
     return render(request, 'post/post_list.html', {
+        'tag': tag,
         'posts': posts,
         'comment_form': comment_form,
     })
@@ -90,30 +95,6 @@ def post_delete(request, pk):
         post.delete()
         messages.success(request, '삭제완료')
         return redirect('post:post_list')
-
-def post_search(request, tag):
-    post_list = Post.objects.filter(tag_set__name__iexact=tag).select_related('author__profile').prefetch_related('tag_set', 'like_user_set__profile')
-
-    paginator = Paginator(post_list, 3)
-    page_num = request.POST.get('page')
-
-    try:
-        posts = paginator.page(page_num)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-
-    if request.is_ajax(): # Ajax request 여부 확인
-        return render(request,'post/post_list_ajax.html',{
-            'posts': posts,
-        })
-
-    return render(request, 'post/post_list_search.html', {
-        'tag': tag,
-        'posts': posts,
-        'paginator': paginator,
-    })
 
 
 @login_required
