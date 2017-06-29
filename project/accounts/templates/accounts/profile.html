@@ -7,9 +7,11 @@
 {% block content %}
 <h3>{{ user.profile.nickname }}'s 프로필</h3>
 <ul>
+  <li>picture:<img src="{{ user.profile.picture.url }}" alt=""></li>
   <li>username : {{ user.username }}</li>
   <li>email : {{ user.email }}</li>
   <li>nickname : {{ user.profile.nickname }}</li>
+  <li><a href="{% url "account_change" %}">회원정보 변경</a></li>
   <li><a href="{% url "password_change" %}">비밀번호 변경</a></li>
 </ul>
 

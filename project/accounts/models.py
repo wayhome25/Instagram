@@ -21,10 +21,12 @@ class Profile(models.Model):
                                         through='Relation',
                                         symmetrical=False,)
     picture = ProcessedImageField(upload_to = user_path,
-                                         processors = [ResizeToFill(150, 150)],
-                                         format='JPEG',
-                                         options={'quality': 90},
-                                         blank=True,)
+                                default='accounts/default/default.jpg',
+                                processors = [ResizeToFill(150, 150)],
+                                format='JPEG',
+                                options={'quality': 90},
+                                blank=True,
+                                )
 
     def __str__(self):
         return self.nickname

@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
-from .forms import SignupForm
+from .forms import SignupForm, ProfileForm
 from .models import Profile, Relation
 
 def signup(request):
@@ -43,6 +43,25 @@ def password_change(request):
     return render(request, 'accounts/password_change.html', {
         'form': form,
     })
+
+
+@login_required
+def account_change(request):
+    profile = get_object_or_404(Profile, pk=request.user.profile.id)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            profile = form.save()
+            messages.success(request, '회원정보가 정상적으로 변경되었습니다.')
+            return redirect('profile')
+        else:
+            messages.error(request, '오류가 발생하였습니다.')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'accounts/password_change.html', {
+        'form': form,
+    })
+
 
 @login_required
 @require_POST

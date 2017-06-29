@@ -4,10 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
-
 class SignupForm(UserCreationForm):
     nickname = forms.CharField()
-    picture = forms.ImageField()
+    picture = forms.ImageField(required=False)
 
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ('email', ) # NOTE: User 모델의 email field 사용
@@ -26,10 +25,27 @@ class SignupForm(UserCreationForm):
             raise forms.ValidationError('사용중인 이메일 입니다.') # NOTE: 유효성 검사 에러메시지 생성
         return email
 
+    def clean_picture(self):
+        picture = self.cleaned_data.get('picture')
+        if not picture:
+            picture = 'accounts/default/default.jpg'
+        return picture
+
     def save(self):
         user = super().save()
         Profile.objects.create(
             user = user,
-            nickname = self.cleaned_data['nickname'],
-            picture = self.cleaned_data['picture'])
+            nickname = self.cleaned_data['nickname'],)
         return user
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['nickname', 'picture']
+        
+    def clean_picture(self):
+        picture = self.cleaned_data.get('picture')
+        if not picture:
+            picture = 'accounts/default/default.jpg'
+        return picture
