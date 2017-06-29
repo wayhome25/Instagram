@@ -8,12 +8,16 @@ from django.views.decorators.http import require_POST
 from .models import Comment, Post, Like
 from .forms import CommentForm, PostForm
 
-
 def post_list(request, tag=None):
+
     if tag:
-        post_list = Post.objects.filter(tag_set__name__iexact=tag).select_related('author__profile').prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile')
+        post_list = Post.objects.filter(tag_set__name__iexact=tag)\
+                    .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile',  'author__profile__follower_user','author__profile__follower_user__from_user')\
+                    .select_related('author__profile')
     else:
-        post_list = Post.objects.prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile').select_related('author__profile').all()
+        post_list = Post.objects.all()\
+                    .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile', 'author__profile__follower_user', 'author__profile__follower_user__from_user',)\
+                    .select_related('author__profile', )
 
     comment_form = CommentForm()
 

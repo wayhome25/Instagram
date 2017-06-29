@@ -1,6 +1,6 @@
 {% extends "post/layout.html" %}
 {% load humanize %}
-{% load post_extras %} {# custom filter 추가 #}
+{% load post_extras %}
 
 
 {% block title %}
@@ -30,9 +30,6 @@ Instagram
   <input class="follow" type="submit" value="follow" name="{{ post.author.profile.id }}">
   {% endif %}
   <span>
-  {% for follower in post.author.profile.get_follower %}
-    {{ follower.nickname }}
-  {% endfor %}
   </span>
   {% if post.author == user %}
   <li><a href="{% url "post:post_edit" post.pk %}">수정</a></li>

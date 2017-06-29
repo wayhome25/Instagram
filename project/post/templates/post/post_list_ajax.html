@@ -4,6 +4,13 @@
 {% for post in posts %}
 <ul>
   <li>{{ post.author.profile.nickname }}</li>
+  {% if user.profile in post.author.profile.get_follower %}
+  <input class="follow" type="submit" value="following" name="{{ post.author.profile.id }}">
+  {% else %}
+  <input class="follow" type="submit" value="follow" name="{{ post.author.profile.id }}">
+  {% endif %}
+  <span>
+  </span>
   {% if post.author == user %}
   <li><a href="{% url "post:post_edit" post.pk %}">수정</a></li>
   <li>
@@ -41,6 +48,7 @@
   </div>
   {% endfor %}
   <div id="comment-more-{{post.id}}"></div>
+
 
   {% if user.is_authenticated %}
   <li id="add-comment-post{{post.id}}">

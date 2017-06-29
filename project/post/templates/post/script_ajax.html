@@ -22,7 +22,9 @@
 
     },
     error: function(request, status, error){
-      alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+      alert("로그인이 필요합니다.");
+      window.location.replace("/accounts/login/");
+      // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
     }
   })
  });
