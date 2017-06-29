@@ -1,0 +1,43 @@
+html, body {
+  background-color: #f8f8f8;
+  min-width: 650px;
+}
+
+.search-form {
+  position: relative;
+  width: 215px;
+  height: 28px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tag-search {
+  width: 215px;
+  height: 28px;
+  background: #fafafa;
+  border: solid 1px #dbdbdb;
+  border-radius: 3px;
+  padding: 3px 30px 3px 30px;
+  color: #999;
+  font-weight: 400;
+  text-align: center;
+  font-size: 14px;
+}
+
+.tag-search:focus {
+  background: #fff;
+  text-align: left;
+}
+
+.search-icon {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  display: inline-block;
+  background-image: url(/static/images/sprites/abfe22.png);
+  background-size: 413px 391px;
+  background-position: -402px -22px;
+}

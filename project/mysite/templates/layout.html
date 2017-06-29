@@ -10,7 +10,9 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
   <!-- 부트스트랩 -->
-  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" >
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/layout.css' %}">
 
   <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
   <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -20,25 +22,32 @@
   <![endif]-->
 </head>
 <body>
-  <div>
-    <a href="/">홈</a>
-    {% if user.is_authenticated %}
-    <a href="{% url "profile" %}">{{ user.profile.nickname }}</a>
-    <a href="{% url "post:post_new" %}">글쓰기</a>
-    <a href="{% url "logout" %}">로그아웃</a>
-    {% else %}
-    <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
-    <a href="{% url "signup" %}">회원가입</a>
-    {% endif %}
-    <form action="{% url "post:post_list" %}" method="post">
-      {% csrf_token %}
-      <input type="text" name="tag" placeholder="태그검색" pattern="#?[\wㄱ-ㅎ|ㅏ-ㅣ|가-힣]+" title="특수문자, 공백 입력불가" required >
-      {# <input type="submit"> - input이 하나일 때는 별도의 submit 없이 엔터로 전송이 가능하다.#}
-    </form>
-  </div>
-  {% block content %}
-  {% endblock %}
+  <div class="container-fluid">
+    <nav class="navbar navbar-default">
+      <div class="nav-wrap">
+        <a class="logo pull-left" href="/"></a>
+        <form class="search-form" action="{% url "post:post_list" %}" method="post">
+          {% csrf_token %}
+          <input class="tag-search" type="text" name="tag" placeholder="검색" pattern="#?[\wㄱ-ㅎ|ㅏ-ㅣ|가-힣]+" title="특수문자, 공백 입력불가" required >
+          {# <input type="submit"> - input이 하나일 때는 별도의 submit 없이 엔터로 전송이 가능하다.#}
+          <span class="search-icon"></span>
+        </form>
+        <span class="pull-right">
+          {% if user.is_authenticated %}
+          <a class="new-post" href="{% url "post:post_new" %}"></a>
+          <a class="like" href=""></a>
+          <a class="account" href="{% url "profile" %}"></a>
+          {% else %}
+          <a  class="account" href="{% url "login" %}?next={{ request.path }}"></a>
+          <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
+          {% endif %}
+        </span>
 
+      </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+  </div>
   {% if messages %}
   <script type="text/javascript">
   {% for message in messages %}

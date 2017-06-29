@@ -16,6 +16,7 @@
   <li>nickname : {{ user.profile.nickname }}</li>
   <li>소개: {{ user.profile.about }}</li>
   <li>성별: {{ user.profile.gender }}</li>
+  <li><a href="{% url "logout" %}">로그아웃</a></li>
   <li><a href="{% url "account_change" %}">회원정보 변경</a></li>
   <li><a href="{% url "password_change" %}">비밀번호 변경</a></li>
 </ul>
