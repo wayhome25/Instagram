@@ -27,6 +27,13 @@ class Profile(models.Model):
                                 options={'quality': 90},
                                 blank=True,
                                 )
+    about = models.CharField(max_length=150, blank=True)
+    GENDER_CHOICES = (
+        ('선택 안 함', '선택 안 함'),
+        ('여성', '여성'),
+        ('남성', '남성'),
+    )
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='N')
 
     def __str__(self):
         return self.nickname
