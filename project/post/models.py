@@ -5,9 +5,19 @@ from imagekit.processors import ResizeToFill
 import re
 
 
+def photo_path(instance, filename):
+    from time import gmtime, strftime
+    from random import choice
+    import string
+    arr = [choice(string.ascii_letters) for _ in range(8)]
+    pid = ''.join(arr)
+    extension = filename.split('.')[-1]
+    return '{}/{}/{}.{}'.format(strftime('post/%Y/%m/%d/'), instance.author.username, pid, extension)
+
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    photo = ProcessedImageField(upload_to='post/post/%Y/%m/%d',
+    photo = ProcessedImageField(upload_to=photo_path,
                                 processors=[ResizeToFill(600, 600)],
                                 format='JPEG',
                                 options={'quality': 90})
