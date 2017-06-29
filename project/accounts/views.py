@@ -11,7 +11,7 @@ from .models import Profile, Relation
 
 def signup(request):
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = SignupForm(request.POST, request.FILES)
         if form.is_valid(): # clean_<필드명> 메소드 호출
             user = form.save()
             return redirect('login')

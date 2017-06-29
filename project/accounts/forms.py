@@ -7,6 +7,7 @@ from .models import Profile
 
 class SignupForm(UserCreationForm):
     nickname = forms.CharField()
+    picture = forms.ImageField()
 
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ('email', ) # NOTE: User 모델의 email field 사용
@@ -29,5 +30,6 @@ class SignupForm(UserCreationForm):
         user = super().save()
         Profile.objects.create(
             user = user,
-            nickname = self.cleaned_data['nickname'])
+            nickname = self.cleaned_data['nickname'],
+            picture = self.cleaned_data['picture'])
         return user
