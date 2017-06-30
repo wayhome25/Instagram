@@ -70,6 +70,11 @@ article.post-wrap {
       background-color: #fff;
       vertical-align: middle;
       display: inline-block;
+
+      &:hover {
+        text-decoration: none;
+        color: $color-text-common;
+      }
     }
 
     .post-delete {
@@ -120,6 +125,10 @@ article.post-wrap {
       border: none;
       color: #999;
       background-color: #fff;
+
+      &:hover {
+        color: $color-text-common;
+      }
     }
     .del-comment {
       background: 0 0;
@@ -130,6 +139,10 @@ article.post-wrap {
       padding: 0;
       margin-right: 12px;
       width: 2em;
+
+      &:hover {
+        color: $color-text-common;
+      }
     }
     .add-comment-wrap {
       padding-top: 16px;

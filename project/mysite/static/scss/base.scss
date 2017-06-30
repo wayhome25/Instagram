@@ -2,7 +2,7 @@
 
 html, body {
   background-color: $color-bg;
-  min-width: 650px;
+  min-width: 550px;
 }
 
 input {
@@ -50,4 +50,17 @@ input {
   background-image: url(/static/images/sprites/abfe22.png);
   background-size: 413px 391px;
   background-position: -402px -22px;
+}
+
+#callmorepost {
+  border-radius: 3px;
+  border: none;
+  width: 100px;
+  height: 28px;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 26px;
+  outline: 0;
+  background-color: rgba(0,0,0,.0975);
 }

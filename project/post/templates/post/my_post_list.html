@@ -1,0 +1,21 @@
+{% extends "post/layout.html" %}
+
+{% block title %}
+{{ user.profile.nickname }}(@{{ user.username }}) - Instagram
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="mylist-container">
+    {% include "post/include_account.html" %}
+    <div class="mylist-content">
+      <div class="row">
+      {% for post in user.post_set.all %}
+        <div class="pic col-md-4"><a href="{% url 'post:my_post_list_detail' user.username %}"><img class="pic-src" src="{{ post.photo.url }}" alt=""></a></div>
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

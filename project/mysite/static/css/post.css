@@ -73,6 +73,11 @@ article.post-wrap header .post-edit, article.post-wrap header .post-delete {
   display: inline-block;
 }
 
+article.post-wrap header .post-edit:hover, article.post-wrap header .post-delete:hover {
+  text-decoration: none;
+  color: #262626;
+}
+
 article.post-wrap header .post-delete {
   line-height: 22px;
 }
@@ -129,6 +134,10 @@ article.post-wrap .post-content .comment-more {
   background-color: #fff;
 }
 
+article.post-wrap .post-content .comment-more:hover {
+  color: #262626;
+}
+
 article.post-wrap .post-content .del-comment {
   background: 0 0;
   border: none;
@@ -138,6 +147,10 @@ article.post-wrap .post-content .del-comment {
   padding: 0;
   margin-right: 12px;
   width: 2em;
+}
+
+article.post-wrap .post-content .del-comment:hover {
+  color: #262626;
 }
 
 article.post-wrap .post-content .add-comment-wrap {

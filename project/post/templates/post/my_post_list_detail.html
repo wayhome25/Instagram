@@ -3,31 +3,12 @@
 {% load post_extras %}
 
 
-{% block title %}
-{% if tag %}
-#{{ tag }} - Instagram
-{% else %}
-Instagram
-{% endif %}
-{% endblock %}
-
 {% block content %}
-
-
-
-
-{% if tag %}
-<div class="search-header">
-  {% if not posts %}
-  <h1 class="search-result-title">#{{tag}}<br>태그 검색 결과가 없습니다.</h1>
-  {% else %}
-  <h1 class="search-result-title">#{{tag}} 검색결과</h1>
-  <span class="search-result-count">게시물 <span class="count">{{ posts.paginator.count|intcomma }}개 </span></span>
-  {% endif %}
+<div class="container-fluid">
+  <div class="mylist-container">
+    {% include "post/include_account.html" %}
+  </div>
 </div>
-{% endif %}
-
-
 {% for post in posts %}
 <article class="post-wrap">
   <header>
@@ -113,10 +94,6 @@ Instagram
 
   <div id="post_list_ajax"></div>
   <input id="page" type="hidden" value="2">
-
-  {% if posts.paginator.count > 4 %}
   <button id="callmorepost" type="button">More Post</button>
-  {% endif %}
-
   {% include "post/script_ajax.html" %}
   {% endblock %}

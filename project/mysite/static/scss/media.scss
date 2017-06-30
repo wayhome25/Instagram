@@ -1,0 +1,17 @@
+@media screen and (max-width: 690px) {
+  .search-form {
+    display: none;
+  }
+
+  .mylist-content {
+    .pic {
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 935px) {
+  .mylist-container {
+    width: 100%;
+  }
+}

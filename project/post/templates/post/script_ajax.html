@@ -70,6 +70,13 @@
     });
   });
 
+
+///////////////// 댓글 작성하기 /////////////////
+  $(document).on('click', '.commnet-icon', function(){
+    var pk = $(this).attr('name');
+    $("#add-comment-post"+pk+">input[type=text]").focus();
+  });
+
 ///////////////// 댓글등록 Ajax /////////////////
 
   $(document).on('click', '.add-comment', function(){
