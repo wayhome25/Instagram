@@ -15,9 +15,11 @@
       alert(response.message);
 
       if(response.status){
-        $("input.follow[name="+pk+"]").val("following");
+        $("input.follow[name="+pk+"]").val("팔로잉");
+        $("input.follow[name="+pk+"]").toggleClass('follow-btn following-btn');
       }else{
-        $("input.follow[name="+pk+"]").val("follow");
+        $("input.follow[name="+pk+"]").val("팔로우");
+        $("input.follow[name="+pk+"]").toggleClass('following-btn follow-btn');
       }
 
     },
@@ -43,14 +45,21 @@
 
       success: function(response){ // 통신 성공시 - 좋아요 갯수 변경, 유저 목록 변경
         alert(response.message);
-        $("#count-"+pk).html(response.like_count+"개");
+
+        $("#count-"+pk).html("좋아요 "+response.like_count+"개");
 
         var users = $("#like-user-"+pk).text();
 
         if(users.indexOf(response.nickname) != -1){
+          if(response.like_count == 0){
+            $("#like-user-"+pk).text("");
+          }else{
           $("#like-user-"+pk).text(users.replace(response.nickname, ""));
+          }
+          $(".like").toggleClass('liked to-like');
         }else{
           $("#like-user-"+pk).text(response.nickname+users);
+          $(".like").toggleClass('to-like liked');
         }
       },
       error: function(request, status, error){ // 통신 실패시 - 로그인 페이지 리다이렉트

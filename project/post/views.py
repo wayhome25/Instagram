@@ -1,5 +1,6 @@
 import json
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
@@ -12,12 +13,12 @@ def post_list(request, tag=None):
 
     if tag:
         post_list = Post.objects.filter(tag_set__name__iexact=tag)\
-                    .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile',  'author__profile__follower_user','author__profile__follower_user__from_user')\
+                    .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile__follower_user','author__profile__follower_user__from_user')\
                     .select_related('author__profile')
     else:
         post_list = Post.objects.all()\
-                    .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile', 'author__profile__follower_user', 'author__profile__follower_user__from_user',)\
-                    .select_related('author__profile', )
+                    .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile__follower_user', 'author__profile__follower_user__from_user',)\
+                    .select_related('author__profile',)
 
     comment_form = CommentForm()
 

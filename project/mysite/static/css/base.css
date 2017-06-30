@@ -3,6 +3,10 @@ html, body {
   min-width: 650px;
 }
 
+input {
+  outline: none;
+}
+
 .search-form {
   position: relative;
   width: 215px;
@@ -23,6 +27,7 @@ html, body {
   font-weight: 400;
   text-align: center;
   font-size: 14px;
+  outline: none;
 }
 
 .tag-search:focus {
