@@ -201,6 +201,8 @@
       type : 'POST',
       {% if tag %}
       url: "{% url 'post:post_search' tag %}", // tag 여부에 따라서 분기처리
+      {% elif follow_set %}
+      url: "{% url 'post:follow_post_list' %}", // view에서 넘겨준 follow_set 여부에 따라서 분기처리
       {% else %}
       url: "{% url 'post:post_list' %}",
       {% endif %}

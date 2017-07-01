@@ -1,0 +1,20 @@
+{% extends "accounts/layout.html" %}
+{% block title %} 회원정보 변경 {% endblock %}
+{% block content %}
+<div class="form-container account-form-container">
+
+
+<form class="form account-form" action="" method="post" enctype="multipart/form-data">
+  <div class="user-title">
+    <img class="account-pic" src="{{ user.profile.picture.url }}" alt="">
+    <h1 class="usernsme">{{ user.username }} 프로필 편집</h1>
+  </div>
+  {% csrf_token %}
+  {{ form.as_p}}
+  <input class="submit_btn" type="submit">
+</form>
+<div class="shortcut">
+  <p class="signup-link">비밀번호 변경을 원하시나요? <a href="{% url "password_change" %}">비밀번호 변경</a></p>
+</div>
+</div>
+{% endblock %}

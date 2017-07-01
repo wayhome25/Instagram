@@ -23,6 +23,11 @@ article.post-wrap {
     border-bottom: 1px solid #efefef;
     color: $color-text-common;
 
+    .user-title {
+      text-decoration: none;
+      color: $color-text-common;
+    }
+
     .user-pic {
       width: 30px;
       height: 30px;

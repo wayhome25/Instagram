@@ -22,9 +22,9 @@ def signup(request):
     })
 
 
-@login_required
-def profile(request):
-    return render(request, 'accounts/profile.html')
+# @login_required
+# def profile(request):
+#     return render(request, 'accounts/profile.html')
 
 
 @login_required
@@ -35,7 +35,7 @@ def password_change(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, '비밀번호가 정상적으로 변경되었습니다.')
-            return redirect('profile')
+            return redirect('post:my_post_list', request.user.username)
         else:
             messages.error(request, '오류가 발생하였습니다.')
     else:
@@ -53,12 +53,12 @@ def account_change(request):
         if form.is_valid():
             profile = form.save()
             messages.success(request, '회원정보가 정상적으로 변경되었습니다.')
-            return redirect('profile')
+            return redirect('post:my_post_list', request.user.username)
         else:
             messages.error(request, '오류가 발생하였습니다.')
     else:
         form = ProfileForm(instance=profile)
-    return render(request, 'accounts/password_change.html', {
+    return render(request, 'accounts/account_change.html', {
         'form': form,
     })
 

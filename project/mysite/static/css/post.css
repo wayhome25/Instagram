@@ -23,6 +23,11 @@ article.post-wrap header {
   color: #262626;
 }
 
+article.post-wrap header .user-title {
+  text-decoration: none;
+  color: #262626;
+}
+
 article.post-wrap header .user-pic {
   width: 30px;
   height: 30px;

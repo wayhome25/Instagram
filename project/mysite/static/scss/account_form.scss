@@ -1,0 +1,128 @@
+@import 'variables';
+
+.form-container {
+  width: 350px;
+  margin: 0 auto;
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    background: 0 0;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 14px;
+    padding: 7px 8px 7px;
+  }
+
+
+}
+
+.form {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  padding: 0 40px 40px 40px;
+  margin: 0 0 10px;
+
+  .title {
+    height: 51px;
+    width: 175px;
+    background-image: url(/static/images/sprites/abfe22.png);
+    background-size: 413px 391px;
+    background-position: 0 0;
+    overflow: hidden;
+    text-indent: 110%;
+    margin: 22px auto 8px;
+  }
+
+
+  .submit_btn {
+    background: #3897f0;
+    border-color: #3897f0;
+    color: #fff;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 28px;
+    outline: none;
+    width: 100%;
+    padding: 0;
+    margin-top: 10px;
+  }
+}
+
+.shortcut {
+  width: 350px;
+  // height: 70px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1px;
+  margin: 0 0 10px;
+  padding: 10px 0;
+  text-align: center;
+
+  .link {
+    color: #262626;
+    font-size: 14px;
+    margin: 15px;
+    text-align: center;
+  }
+}
+
+.account-form-container {
+  width: 550px;
+  p {
+    margin-bottom: 20px;
+  }
+  .account-form {
+    padding : 40px;
+
+    .user-title{
+      margin-bottom: 40px;
+      text-align: center;
+      .account-pic {
+        width: 38px;
+        height: 38px;
+        background-color: #fafafa;
+        border: 1px solid rgba(0,0,0,.0975);
+        margin-right: 8px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .usernsme {
+        display: inline-block;
+        margin: 0 10px;
+        vertical-align: middle;
+        font-weight: 200;
+        font-size: 30px;
+      }
+    }
+  }
+
+  #picture-clear_id {
+    width: 12px;
+  }
+  select {
+    background: 0 0;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    color: #262626;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    height: 32px;
+    padding: 0 30px 0 10px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .shortcut {
+    width: 100%;
+    .signup-link {
+      margin-top: 20px;
+    }
+  }
+}

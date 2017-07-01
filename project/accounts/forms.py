@@ -10,6 +10,10 @@ class SignupForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ('email', ) # NOTE: User 모델의 email field 사용
+        labels = {
+            'nickname':'닉네임',
+            'picture': '프로필 사진',
+        }
 
     # NOTE: clean_<필드명> 메서드를 활용하여, is_valid() 메소드 실행시 nickname 필드에 대한 유효성 검증 실행
     def clean_nickname(self):
@@ -40,7 +44,7 @@ class SignupForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
-    about = forms.CharField(widget=forms.Textarea(attrs={
+    about = forms.CharField(label='자기소개', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 50,
         'placeholder': '소개는 150자 까지 등록 가능합니다',}))
@@ -48,9 +52,20 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['nickname', 'picture', 'about', 'gender']
+        labels = {
+            'picture': '프로필 사진',
+        }
 
     def clean_picture(self):
         picture = self.cleaned_data.get('picture')
         if not picture:
             picture = 'accounts/default/default.jpg'
         return picture
+
+    def __init__(self, *args, **kwargs):
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+        # self.fields['nickname'].label = '닉네임'
+        # self.fields['picture'].label = '프로필 사진'
+        # self.fields['about'].label = '자기소개'
+        # self.fields['gender'].label = '성별(선택사항)'
+        # https://github.com/django/django/blob/1.10.6/django/forms/models.py#L185

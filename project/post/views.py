@@ -33,6 +33,7 @@ def post_list(request, tag=None):
         posts = paginator.page(paginator.num_pages)
 
     if request.is_ajax(): # Ajax request 여부 확인
+        # print('####Ajax 동작!!######')
         return render(request,'post/post_list_ajax.html',{
             'posts': posts,
             'comment_form': comment_form,
@@ -51,22 +52,30 @@ def post_list(request, tag=None):
 
 @login_required
 def my_post_list(request, username):
+    user = get_object_or_404(get_user_model(), username=username)
 
-    login_user = get_user_model().objects.filter(id=request.user.id).select_related('profile')\
+
+    target_user = get_user_model().objects.filter(id=user.id).select_related('profile')\
                                                                     .prefetch_related('profile__follower_user__from_user', 'profile__follow_user__to_user')
+    user = get_object_or_404(get_user_model(), username=username)
+    post_list = user.post_set.all()
 
     return render(request, 'post/my_post_list.html', {
-        'login_user':login_user,
+        'target_user':target_user,
+        'post_list': post_list,
+        'username': username,
     })
 
 
 @login_required
 def my_post_list_detail(request, username):
+    user = get_object_or_404(get_user_model(), username=username)
 
-    login_user = get_user_model().objects.filter(id=request.user.id).select_related('profile')\
+    target_user = get_user_model().objects.filter(id=user.id).select_related('profile')\
                                                                     .prefetch_related('profile__follower_user__from_user', 'profile__follow_user__to_user')
 
-    post_list = Post.objects.filter(author = request.user)\
+
+    post_list = Post.objects.filter(author = user)\
                 .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile__follower_user', 'author__profile__follower_user__from_user',)\
                 .select_related('author__profile',)
 
@@ -89,9 +98,45 @@ def my_post_list_detail(request, username):
         })
 
     return render(request, 'post/my_post_list_detail.html', {
+        'username': username,
         'posts': posts,
         'comment_form': comment_form,
-        'login_user':login_user,
+        'target_user':target_user,
+    })
+
+
+@login_required
+def follow_post_list(request):
+    follow_set =  request.user.profile.get_following
+    post_list = Post.objects.filter(author__profile__in = follow_set)\
+                .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile__follower_user', 'author__profile__follower_user__from_user',)\
+                .select_related('author__profile',)
+
+    comment_form = CommentForm()
+
+    paginator = Paginator(post_list, 3)
+    page_num = request.POST.get('page')
+
+
+    try:
+        posts = paginator.page(page_num)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+
+    print('post_list : ', post_list, 'page_num :', page_num, 'posts :', posts)
+    if request.is_ajax(): # Ajax request 여부 확인
+        return render(request,'post/post_list_ajax.html',{
+            'posts': posts,
+            'comment_form': comment_form,
+        })
+
+    return render(request, 'post/post_list.html', {
+        'follow_set': follow_set,
+        'posts': posts,
+        'comment_form': comment_form,
     })
 
 

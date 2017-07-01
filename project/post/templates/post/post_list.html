@@ -14,7 +14,15 @@ Instagram
 {% block content %}
 
 
-
+{% if follow_set %}
+<div class="search-header">
+  <h1 class="search-result-title">팔로우 목록</h1>
+</div>
+{% elif not posts %}
+<div class="search-header">
+  <h1 class="search-result-title">팔로우 중인 유저가 없습니다. 팔로우를 시작해보세요!</h1>
+</div>
+{% endif %}
 
 {% if tag %}
 <div class="search-header">
@@ -31,8 +39,10 @@ Instagram
 {% for post in posts %}
 <article class="post-wrap">
   <header>
+    <a class="user-title" href="{% url "post:my_post_list" post.author.username %}">
     <img class="user-pic" src="{{ post.author.profile.picture.url }}" alt="유저 프로필 사진">
     <span class="post-username">{{ post.author.profile.nickname  }}</span>
+    </a>
     <span class="pull-right">
       {% if user.profile in post.author.profile.get_follower %}
       {# {% if post.author.profile in user_profile.follow_set.all %}#}

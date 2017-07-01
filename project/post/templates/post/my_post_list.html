@@ -11,8 +11,8 @@
     {% include "post/include_account.html" %}
     <div class="mylist-content">
       <div class="row">
-      {% for post in user.post_set.all %}
-        <div class="pic col-md-4"><a href="{% url 'post:my_post_list_detail' user.username %}"><img class="pic-src" src="{{ post.photo.url }}" alt=""></a></div>
+      {% for post in post_list %}
+        <div class="pic col-md-4"><a href="{% url 'post:my_post_list_detail' username %}"><img class="pic-src" src="{{ post.photo.url }}" alt=""></a></div>
       {% endfor %}
     </div>
     </div>

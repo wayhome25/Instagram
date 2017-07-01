@@ -3,16 +3,18 @@
     <img class="my-pic" src="{{ user.profile.picture.url }}" alt="">
   </div>
   <div class="mylist-header-info">
-    <h1 class="username">{{ user.username }}</h1>
-    <a class="profile" href="{% url 'profile' %}" >회원정보</a>
+    <h1 class="username">{{ username }}</h1>
+    {% if user.username == username%}
+    <a class="profile" href="{% url 'account_change' %}" >프로필 편집</a>
     <a class="profile" href="{% url 'logout' %}" >로그아웃</a>
+    {% endif %}
+    {% for user in target_user.all %}
     <ul class="info-list">
-      {% for user in login_user.all %}
       <li><span class="info-list-title">게시물</span> {{ user.post_set.count }}</li>
       <li><span class="info-list-title">팔로워</span> {{ user.profile.follower_count }}</li>
       <li><span class="info-list-title">팔로우</span> {{ user.profile.following_count }}</li>
-      {% endfor %}
     </ul>
     <p class="about"><span class="nickname">{{ user.profile.nickname }}</span> {{ user.profile.about }}</p>
+    {% endfor %}
   </div>
 </div>
