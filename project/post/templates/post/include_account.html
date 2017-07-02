@@ -14,7 +14,7 @@
       <li><span class="info-list-title">팔로워</span> {{ user.profile.follower_count }}</li>
       <li><span class="info-list-title">팔로우</span> {{ user.profile.following_count }}</li>
     </ul>
-    <p class="about"><span class="nickname">{{ user.profile.nickname }}</span> {{ user.profile.about }}</p>
+    <p class="about"><span class="nickname">{{ user.profile.nickname }}</span> {{ user.profile.about|urlize }}</p>
     {% endfor %}
   </div>
 </div>

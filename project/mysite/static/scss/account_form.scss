@@ -93,11 +93,12 @@
         border-radius: 50%;
         overflow: hidden;
       }
-      .usernsme {
+      .usernsme,
+      .form-title {
         display: inline-block;
         margin: 0 10px;
         vertical-align: middle;
-        font-weight: 200;
+        font-weight: 400;
         font-size: 30px;
       }
     }

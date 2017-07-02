@@ -33,7 +33,6 @@ def post_list(request, tag=None):
         posts = paginator.page(paginator.num_pages)
 
     if request.is_ajax(): # Ajax request 여부 확인
-        # print('####Ajax 동작!!######')
         return render(request,'post/post_list_ajax.html',{
             'posts': posts,
             'comment_form': comment_form,
@@ -154,7 +153,7 @@ def post_new(request):
 
     else:
         form = PostForm()
-    return render(request, 'post/post_form.html', {
+    return render(request, 'post/post_new.html', {
         'form': form,
     })
 
@@ -176,7 +175,8 @@ def post_edit(request, pk):
 
     else:
         form = PostForm(instance=post)
-    return render(request, 'post/post_form.html', {
+    return render(request, 'post/post_edit.html', {
+        'post': post,
         'form': form,
     })
 

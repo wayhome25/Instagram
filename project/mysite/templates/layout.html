@@ -5,9 +5,14 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
   <title>{% block title %}Instagram{% endblock %}</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  <!-- favicon -->
+  <link rel="icon" sizes="192x192" href="{% static 'images/icon/icon_192x192.png' %}">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180"  href="{% static 'images/icon/icon_180x180.png' %}">
 
   <!-- 부트스트랩 -->
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" >
@@ -17,6 +22,7 @@
   <link rel="stylesheet" href="{% static 'css/mylist.css' %}">
   <link rel="stylesheet" href="{% static 'css/search.css' %}">
   <link rel="stylesheet" href="{% static 'css/account_form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/post_upload.css' %}">
   <link rel="stylesheet" href="{% static 'css/media.css' %}">
 
   <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
@@ -43,7 +49,7 @@
           {% if user.is_authenticated %}
           <a class="account" href="{% url "post:my_post_list" user.username %}"></a>
           {% else %}
-          <a  class="account" href="{% url "login" %}?next={{ request.path }}"></a>
+          <a  class="account" href="{% url "login" %}"></a>
           {% endif %}
         </span>
 

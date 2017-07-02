@@ -1,5 +1,6 @@
 article.post-wrap {
   max-width: 600px;
+  overflow: hidden;
   margin: 0 auto;
   border: 1px solid #e7e7e7;
   background-color: #fff;
@@ -124,6 +125,7 @@ article.post-wrap .post-content .commnet-icon {
 }
 
 article.post-wrap .post-content .time {
+  margin: 5px 0;
   font-size: 10px;
   line-height: 18px;
   color: #999;
@@ -131,6 +133,7 @@ article.post-wrap .post-content .time {
 }
 
 article.post-wrap .post-content .comment-more {
+  display: block;
   margin: 5px 0;
   outline: none;
   padding: 0;

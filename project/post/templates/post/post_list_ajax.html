@@ -5,8 +5,10 @@
 {% for post in posts %}
 <article class="post-wrap">
   <header>
+    <a class="user-title" href="{% url "post:my_post_list" post.author.username %}">
     <img class="user-pic" src="{{ post.author.profile.picture.url }}" alt="유저 프로필 사진">
     <span class="post-username">{{ post.author.profile.nickname  }}</span>
+    </a>
     <span class="pull-right">
       {% if user.profile in post.author.profile.get_follower %}
       {# {% if post.author.profile in user_profile.follow_set.all %}#}

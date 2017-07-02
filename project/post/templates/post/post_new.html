@@ -1,0 +1,56 @@
+{% extends "post/layout.html" %}
+
+{% block title %}New Post - Instagram{% endblock %}
+
+{% block content %}
+
+<div class="form-container account-form-container">
+  <form class="form account-form" action="" method="post" enctype="multipart/form-data">
+    <div class="user-title">
+      <h1 class="form-title">NEW POST</h1>
+    </div>
+    <div class="preview">
+      <div class="upload">
+        <span class="preview-bg"></span>
+        <p class="preview-title">포스트 이미지 추가</p>
+        {% if post %}
+        <p><img id="img_id" src="{{ post.photo.url }}" style="width: 300px; height: 300px; object-fit: cover" ></p>
+        {% else %}
+        <p><img id="img_id" src="" style="width: 300px; height: 300px; object-fit: cover" ></p>
+        {% endif %}
+      </div>
+    </div>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="submit_btn" type="submit" value="저장">
+  </form>
+</div>
+
+<script type="text/javascript">
+
+
+function upload_img(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $('#img_id').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  $(".preview-bg").remove();
+  $(".preview-title").remove();
+}
+
+$("#id_photo").change(function(){
+  upload_img(this);
+});
+
+$(document).on('click', '.upload', function(){
+  $("#id_photo").click();
+});
+
+$('#id_photo').attr("required", true);
+</script>
+{% endblock %}
