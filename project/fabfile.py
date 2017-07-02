@@ -63,7 +63,7 @@ def deploy():
     _grant_apache2()
     _grant_sqlite3()
     _restart_apache2()
-    
+
 def create_superuser():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
     run('cd %s && %s/bin/python3 manage.py createsuperuser' % (
@@ -74,10 +74,10 @@ def _mkdir_ssh():
     USER_HOME = os.path.expanduser('~')
     if not os.path.exists(os.path.join(USER_HOME, '.ssh/')):
         local("mkdir {}".format(os.path.join(USER_HOME, '.ssh')))
-    
+
 def _register_ssh_key():
     local("ssh-keyscan -H {} >> {}".format(REMOTE_HOST, os.path.expanduser('~/.ssh/known_hosts')))
-    
+
 def _get_latest_apt():
     update_or_not = input('Would U install Apache2/Python3 ?\n'
                           '[y/n, default: y]: ')
@@ -126,7 +126,7 @@ def _update_virtualenv():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
     if not exists(virtualenv_folder + '/bin/pip'):
         run('cd /home/%s/.virtualenvs && virtualenv %s' % (env.user, PROJECT_NAME))
-    run('%s/bin/pip install "django<2"' % (
+    run('%s/bin/pip install "django==1.10"' % (
         virtualenv_folder
     ))
 
