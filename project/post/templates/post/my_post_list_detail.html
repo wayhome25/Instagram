@@ -16,7 +16,6 @@
     <span class="post-username">{{ post.author.profile.nickname  }}</span>
     <span class="pull-right">
       {% if user.profile in post.author.profile.get_follower %}
-      {# {% if post.author.profile in user_profile.follow_set.all %}#}
       <input class="follow following-btn" type="submit" value="팔로잉" name="{{ post.author.profile.id }}">
       {% else %}
       <input class="follow follow-btn" type="submit" value="팔로우" name="{{ post.author.profile.id }}">

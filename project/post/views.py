@@ -49,33 +49,35 @@ def post_list(request, tag=None):
         'comment_form': comment_form,
     })
 
-@login_required
+
 def my_post_list(request, username):
     user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
 
 
     target_user = get_user_model().objects.filter(id=user.id).select_related('profile')\
                                                                     .prefetch_related('profile__follower_user__from_user', 'profile__follow_user__to_user')
-    user = get_object_or_404(get_user_model(), username=username)
+
     post_list = user.post_set.all()
 
     return render(request, 'post/my_post_list.html', {
+        'user_profile':user_profile,
         'target_user':target_user,
         'post_list': post_list,
         'username': username,
     })
 
 
-@login_required
 def my_post_list_detail(request, username):
     user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
 
     target_user = get_user_model().objects.filter(id=user.id).select_related('profile')\
                                                                     .prefetch_related('profile__follower_user__from_user', 'profile__follow_user__to_user')
 
 
     post_list = Post.objects.filter(author = user)\
-                .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile__follower_user', 'author__profile__follower_user__from_user',)\
+                .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 'author__profile__follower_user', 'author__profile__follower_user__from_user', )\
                 .select_related('author__profile',)
 
     comment_form = CommentForm()
@@ -97,11 +99,15 @@ def my_post_list_detail(request, username):
         })
 
     return render(request, 'post/my_post_list_detail.html', {
+        'user_profile':user_profile,
         'username': username,
         'posts': posts,
         'comment_form': comment_form,
         'target_user':target_user,
     })
+
+def follow_list(request, username):
+    pass
 
 
 @login_required
@@ -125,7 +131,6 @@ def follow_post_list(request):
         posts = paginator.page(paginator.num_pages)
 
 
-    print('post_list : ', post_list, 'page_num :', page_num, 'posts :', posts)
     if request.is_ajax(): # Ajax request 여부 확인
         return render(request,'post/post_list_ajax.html',{
             'posts': posts,
