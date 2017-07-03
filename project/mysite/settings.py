@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'accounts',
     # 'dojo',
     'post',
+    'raven.contrib.django.raven_compat', #senty 에러로깅을 위한 추가
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
+
+# sentry 에러로깅 설정
+import raven
+GIT_ROOT = os.path.join(BASE_DIR, '..')
+if os.path.exists(os.path.join(GIT_ROOT, '.git')):
+    release = raven.fetch_git_sha(GIT_ROOT) # 현재 최근 커밋해시 획득
+else:
+    release = 'dev'
+
+RAVEN_CONFIG = {
+    'release': release,
+    'dsn': 'https://03f215bab74642a0af8158ea7b29ea74:08a7789ebae04b8eb1e4641f52bbced2@sentry.io/186918',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+}
