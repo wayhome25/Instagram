@@ -5,15 +5,16 @@ from .models import Profile
 
 
 class SignupForm(UserCreationForm):
-    nickname = forms.CharField()
-    picture = forms.ImageField(required=False)
+    username = forms.CharField(label='사용자명', widget=forms.TextInput(attrs={
+        'pattern': '[a-zA-Z0-9]+',
+        'title': '특수문자, 공백 입력불가',
+    }))
+
+    nickname = forms.CharField(label='닉네임')
+    picture = forms.ImageField(label='프로필 사진', required=False)
 
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ('email', ) # NOTE: User 모델의 email field 사용
-        labels = {
-            'nickname':'닉네임',
-            'picture': '프로필 사진',
-        }
 
     # NOTE: clean_<필드명> 메서드를 활용하여, is_valid() 메소드 실행시 nickname 필드에 대한 유효성 검증 실행
     def clean_nickname(self):
