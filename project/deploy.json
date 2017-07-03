@@ -3,7 +3,7 @@
   "PROJECT_NAME":"project/mysite",
   "REMOTE_HOST":"chobo-monkey-instagram.tk",
   "REMOTE_USER":"siwabada",
-  "STATIC_ROOT":"static",
+  "STATIC_ROOT":"staticfiles",
   "STATIC_URL":"static",
   "MEDIA_ROOT":"media"
 }

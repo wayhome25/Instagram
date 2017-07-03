@@ -130,6 +130,27 @@ def _update_virtualenv():
         virtualenv_folder
     ))
 
+    # 추가
+    run('%s/bin/pip install "django_extensions"' % (
+        virtualenv_folder
+    ))
+
+    run('%s/bin/pip install "django-debug-toolbar"' % (
+        virtualenv_folder
+    ))
+
+    run('%s/bin/pip install "pillow"' % (
+        virtualenv_folder
+    ))
+
+    run('%s/bin/pip install "pilkit"' % (
+        virtualenv_folder
+    ))
+
+    run('%s/bin/pip install "django-imagekit"' % (
+        virtualenv_folder
+    ))
+
 def _update_static_files():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
     run('cd %s && %s/bin/python3 manage.py collectstatic --noinput' % (
@@ -138,6 +159,9 @@ def _update_static_files():
 
 def _update_database():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
+    run('cd %s && %s/bin/python3 manage.py makemigrations --noinput' % (
+        project_folder, virtualenv_folder
+    ))
     run('cd %s && %s/bin/python3 manage.py migrate --noinput' % (
         project_folder, virtualenv_folder
     ))
