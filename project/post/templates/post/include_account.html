@@ -1,6 +1,11 @@
+{% load static %}
 <div class="mylist-header">
   <div class="mylist-header-pic">
-    <img class="my-pic" src="{{ user_profile.picture.url }}" alt="">
+    {% if user_profile.picture %}
+    <img class="my-pic" src="{{ user_profile.picture.url }}" alt="프로필사진">
+    {% else %}
+    <img class="my-pic" src="{% static 'images/default/default.jpg' %}" alt="프로필사진">
+    {% endif %}
   </div>
   <div class="mylist-header-info">
     <h1 class="username">{{ username }}</h1>

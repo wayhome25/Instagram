@@ -21,7 +21,6 @@ class Profile(models.Model):
                                         through='Relation',
                                         symmetrical=False,)
     picture = ProcessedImageField(upload_to = user_path,
-                                default='accounts/default/default.jpg',
                                 processors = [ResizeToFill(150, 150)],
                                 format='JPEG',
                                 options={'quality': 90},

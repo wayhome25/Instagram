@@ -32,19 +32,20 @@ class SignupForm(UserCreationForm):
     def clean_picture(self):
         picture = self.cleaned_data.get('picture')
         if not picture:
-            picture = 'accounts/default/default.jpg'
+            picture = None
         return picture
 
     def save(self):
         user = super().save()
         Profile.objects.create(
             user = user,
-            nickname = self.cleaned_data['nickname'],)
+            nickname = self.cleaned_data['nickname'],
+            picture = self.cleaned_data['picture'],)
         return user
 
 
 class ProfileForm(forms.ModelForm):
-    about = forms.CharField(label='자기소개', widget=forms.Textarea(attrs={
+    about = forms.CharField(label='자기소개', required=False, widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 50,
         'placeholder': '소개는 150자 까지 등록 가능합니다',}))
@@ -59,7 +60,7 @@ class ProfileForm(forms.ModelForm):
     def clean_picture(self):
         picture = self.cleaned_data.get('picture')
         if not picture:
-            picture = 'accounts/default/default.jpg'
+            picture = None
         return picture
 
     def __init__(self, *args, **kwargs):
