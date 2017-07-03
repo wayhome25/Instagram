@@ -56,10 +56,10 @@
           }else{
           $("#like-user-"+pk).text(users.replace(response.nickname, ""));
           }
-          $(".like").toggleClass('liked to-like');
+          $("input.like[name="+pk+"]").toggleClass('liked to-like');
         }else{
           $("#like-user-"+pk).text(response.nickname+users);
-          $(".like").toggleClass('to-like liked');
+          $("input.like[name="+pk+"]").toggleClass('to-like liked');
         }
       },
       error: function(request, status, error){ // 통신 실패시 - 로그인 페이지 리다이렉트
