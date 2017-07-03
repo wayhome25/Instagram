@@ -1,7 +1,7 @@
 {% extends "post/layout.html" %}
 {% load humanize %}
 {% load post_extras %}
-
+{% load static %}
 
 {% block title %}
 {% if tag %}
@@ -40,7 +40,11 @@ Instagram
 <article class="post-wrap">
   <header>
     <a class="user-title" href="{% url "post:my_post_list" post.author.username %}">
-    <img class="user-pic" src="{{ post.author.profile.picture.url }}" alt="유저 프로필 사진">
+    {% if post.author.profile.picture %}
+    <img class="user-pic" src="{{ post.author.profile.picture.url }}" alt="프로필사진">
+    {% else %}
+    <img class="user-pic" src="{% static 'images/default/default.jpg' %}" alt="프로필사진">
+    {% endif %}
     <span class="post-username">{{ post.author.profile.nickname  }}</span>
     </a>
     <span class="pull-right">

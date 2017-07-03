@@ -123,12 +123,13 @@ def _update_settings():
     append(settings_path, '\nfrom .secret_key import SECRET_KEY')
 
 def _update_virtualenv():
-    virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
+    virtualenv_folder = project_folder + '/../.virtualenvs/mysite'.format(PROJECT_NAME)
     if not exists(virtualenv_folder + '/bin/pip'):
         run('cd /home/%s/.virtualenvs && virtualenv %s' % (env.user, PROJECT_NAME))
-    run('%s/bin/pip install "django==1.10"' % (
+    run('%s/bin/pip install "django<2"' % (
         virtualenv_folder
     ))
+
 
     # 추가
     run('%s/bin/pip install "django_extensions"' % (
