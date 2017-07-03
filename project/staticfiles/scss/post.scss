@@ -1,0 +1,179 @@
+@import 'variables';
+
+article.post-wrap {
+  max-width: 600px;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid $color-border;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 60px;
+
+  .post-username,
+  .comment-username,
+  .like-count {
+    font-weight: 600;
+    text-overflow: ellipsis;
+    margin-right: .3em;
+  }
+
+  header {
+    width: 600px;
+    height: 60px;
+    padding: 16px;
+    border-bottom: 1px solid #efefef;
+    color: $color-text-common;
+
+    .user-title {
+      text-decoration: none;
+      color: $color-text-common;
+    }
+
+    .user-pic {
+      width: 30px;
+      height: 30px;
+      background-color: #fafafa;
+      border: 1px solid rgba(0,0,0,.0975);
+      margin-right: 8px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .follow {
+      border-radius: 3px;
+      border-style: solid;
+      border-width: 1px;
+      width: 54px;
+      height: 28px;
+      padding: 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 26px;
+      outline: 0;
+    }
+
+    .follow-btn {
+      background: #3897f0;
+      border-color: #3897f0;
+      color: #fff;
+    }
+    .following-btn {
+      border-color: #dbdbdb;
+      background-color: #fff;
+    }
+
+    .post-delete-form {
+      display: inline-block;
+    }
+
+    .post-edit, .post-delete{
+      border: none;
+      height: 28px;
+      font-size: 14px;
+      margin-right: 10px;
+      line-height: 28px;
+      color: #c7c7c7;
+      background-color: #fff;
+      vertical-align: middle;
+      display: inline-block;
+
+      &:hover {
+        text-decoration: none;
+        color: $color-text-common;
+      }
+    }
+
+    .post-delete {
+      line-height: 22px;
+    }
+  }
+
+  .post-content {
+    padding: 0 16px;
+
+    .like {
+      height: 24px;
+      width: 24px;
+      background-image: url(/static/images/sprites/fef349.png);
+      border: none;
+      background-color: #fff;
+      margin: 8px 8px 8px 0;
+    }
+    .liked {
+      background-position: 0 -349px;
+    }
+    .to-like {
+      background-position: -26px -349px;
+    }
+    .like-count {
+      margin-bottom: 5px;
+    }
+    .commnet-icon {
+      height: 24px;
+      width: 24px;
+      background-image: url(/static/images/sprites/fef349.png);
+      background-position: -306px -289px;
+      border: none;
+      background-color: #fff;
+      margin: 8px;
+      margin-left: 4px;
+    }
+    .time {
+      margin: 5px 0;
+      font-size: 10px;
+      line-height: 18px;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .comment-more {
+      display: block;
+      margin: 5px 0;
+      outline: none;
+      padding: 0;
+      border: none;
+      color: #999;
+      background-color: #fff;
+
+      &:hover {
+        color: $color-text-common;
+      }
+    }
+    .del-comment {
+      background: 0 0;
+      border: none;
+      color: #c7c7c7;
+      cursor: pointer;
+      float: right;
+      padding: 0;
+      margin-right: 12px;
+      width: 2em;
+
+      &:hover {
+        color: $color-text-common;
+      }
+    }
+    .add-comment-wrap {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      border-top: 1px solid #efefef;
+      color: #999;
+
+      .comment-form {
+        height: 18px;
+        border: none;
+        outline: 0;
+      }
+      .add-comment-btn {
+        border: none;
+        width: 54px;
+        height: 18px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18px;
+        color: #3897f0;
+        background-color: #fff;
+        float: right;
+      }
+    }
+  }
+}

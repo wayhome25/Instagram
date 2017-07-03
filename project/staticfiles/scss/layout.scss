@@ -1,0 +1,59 @@
+@import 'variables';
+
+.container-fluid {
+  padding: 0;
+}
+
+.navbar-default {
+  background-color: #fff ;
+  height: 75px;
+  padding: 26px 40px;
+  margin-bottom: 60px;
+  text-align: center;
+
+  .nav-wrap {
+    max-width: 1010px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .logo {
+    width: 160px;
+    height: 30px;
+    display: inline-block;
+    background-size: 350px;
+    background-image: url(/static/images/sprites/abfe22.png);
+    background-position: -149px 0;
+  }
+
+  .new-post {
+    width: 24px;
+    height: 23px;
+    margin-left: 30px;
+    display: inline-block;
+    background-size: 413px 391px;
+    background-image: url(/static/images/sprites/abfe22.png);
+    background-position: -201px -111px;
+  }
+
+  .follow-list {
+    width: 24px;
+    height: 24px;
+    margin-left: 30px;
+    display: inline-block;
+    background-size: 413px 391px;
+    background-image: url(/static/images/sprites/abfe22.png);
+    background-position: -192px -283px;
+  }
+
+  .account {
+    width: 24px;
+    height: 24px;
+    margin-left: 30px;
+    display: inline-block;
+    background-size: 413px 391px;
+    background-image: url(/static/images/sprites/abfe22.png);
+    background-position: -275px -342px;
+  }
+}

@@ -1,0 +1,93 @@
+@import 'variables';
+
+.mylist-container {
+  width: 935px;
+  // min-width: 650px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.mylist-header {
+  margin-bottom: 40px;
+  height: 160px;
+
+  .mylist-header-pic {
+    width: 40%;
+    float: left;
+    text-align: center;
+
+    .my-pic {
+      width: 152px;
+      height: 152px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.0975);
+    }
+  }
+
+  .mylist-header-info {
+    width: 60%;
+    float: left;
+
+    .username {
+      font-size: 35px;
+      font-weight: 200;
+      display: inline-block;
+      padding-right: 25px;
+      margin-top: 10px;
+    }
+
+    .profile {
+      width: 114px;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      color: #262626;
+      padding: 3px 20px;
+      font-weight: 600;
+      vertical-align: text-bottom;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+
+    .info-list {
+      height: 50px;
+      padding: 18px 0;
+      font-size: 15px;
+      font-weight: 600;
+      li {
+        padding-right: 35px;
+        list-style: none;
+        float: left;
+
+        .info-list-title {
+          font-weight: 400;
+        }
+      }
+    }
+
+    .about {
+      font-size: 15px;
+      .nickname {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.mylist-content {
+  .pic {
+    width: 33.33333333%;
+    padding: 13px;
+    float: left;
+    position: relative;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+
+  .pic-src {
+    width: 100%;
+  }
+}

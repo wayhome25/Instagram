@@ -1,0 +1,90 @@
+.mylist-container {
+  width: 935px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.mylist-header {
+  margin-bottom: 40px;
+  height: 160px;
+}
+
+.mylist-header .mylist-header-pic {
+  width: 40%;
+  float: left;
+  text-align: center;
+}
+
+.mylist-header .mylist-header-pic .my-pic {
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.0975);
+}
+
+.mylist-header .mylist-header-info {
+  width: 60%;
+  float: left;
+}
+
+.mylist-header .mylist-header-info .username {
+  font-size: 35px;
+  font-weight: 200;
+  display: inline-block;
+  padding-right: 25px;
+  margin-top: 10px;
+}
+
+.mylist-header .mylist-header-info .profile {
+  width: 114px;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  color: #262626;
+  padding: 3px 20px;
+  font-weight: 600;
+  vertical-align: text-bottom;
+}
+
+.mylist-header .mylist-header-info .profile:hover {
+  text-decoration: none;
+}
+
+.mylist-header .mylist-header-info .info-list {
+  height: 50px;
+  padding: 18px 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.mylist-header .mylist-header-info .info-list li {
+  padding-right: 35px;
+  list-style: none;
+  float: left;
+}
+
+.mylist-header .mylist-header-info .info-list li .info-list-title {
+  font-weight: 400;
+}
+
+.mylist-header .mylist-header-info .about {
+  font-size: 15px;
+}
+
+.mylist-header .mylist-header-info .about .nickname {
+  font-weight: 600;
+}
+
+.mylist-content .pic {
+  width: 33.33333333%;
+  padding: 13px;
+  float: left;
+  position: relative;
+}
+
+.mylist-content .pic:hover {
+  opacity: 0.7;
+}
+
+.mylist-content .pic-src {
+  width: 100%;
+}

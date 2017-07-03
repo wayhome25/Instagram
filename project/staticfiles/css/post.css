@@ -1,0 +1,187 @@
+article.post-wrap {
+  max-width: 600px;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid #e7e7e7;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 60px;
+}
+
+article.post-wrap .post-username,
+article.post-wrap .comment-username,
+article.post-wrap .like-count {
+  font-weight: 600;
+  text-overflow: ellipsis;
+  margin-right: .3em;
+}
+
+article.post-wrap header {
+  width: 600px;
+  height: 60px;
+  padding: 16px;
+  border-bottom: 1px solid #efefef;
+  color: #262626;
+}
+
+article.post-wrap header .user-title {
+  text-decoration: none;
+  color: #262626;
+}
+
+article.post-wrap header .user-pic {
+  width: 30px;
+  height: 30px;
+  background-color: #fafafa;
+  border: 1px solid rgba(0, 0, 0, 0.0975);
+  margin-right: 8px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+article.post-wrap header .follow {
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  width: 54px;
+  height: 28px;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 26px;
+  outline: 0;
+}
+
+article.post-wrap header .follow-btn {
+  background: #3897f0;
+  border-color: #3897f0;
+  color: #fff;
+}
+
+article.post-wrap header .following-btn {
+  border-color: #dbdbdb;
+  background-color: #fff;
+}
+
+article.post-wrap header .post-delete-form {
+  display: inline-block;
+}
+
+article.post-wrap header .post-edit, article.post-wrap header .post-delete {
+  border: none;
+  height: 28px;
+  font-size: 14px;
+  margin-right: 10px;
+  line-height: 28px;
+  color: #c7c7c7;
+  background-color: #fff;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+article.post-wrap header .post-edit:hover, article.post-wrap header .post-delete:hover {
+  text-decoration: none;
+  color: #262626;
+}
+
+article.post-wrap header .post-delete {
+  line-height: 22px;
+}
+
+article.post-wrap .post-content {
+  padding: 0 16px;
+}
+
+article.post-wrap .post-content .like {
+  height: 24px;
+  width: 24px;
+  background-image: url(/static/images/sprites/fef349.png);
+  border: none;
+  background-color: #fff;
+  margin: 8px 8px 8px 0;
+}
+
+article.post-wrap .post-content .liked {
+  background-position: 0 -349px;
+}
+
+article.post-wrap .post-content .to-like {
+  background-position: -26px -349px;
+}
+
+article.post-wrap .post-content .like-count {
+  margin-bottom: 5px;
+}
+
+article.post-wrap .post-content .commnet-icon {
+  height: 24px;
+  width: 24px;
+  background-image: url(/static/images/sprites/fef349.png);
+  background-position: -306px -289px;
+  border: none;
+  background-color: #fff;
+  margin: 8px;
+  margin-left: 4px;
+}
+
+article.post-wrap .post-content .time {
+  margin: 5px 0;
+  font-size: 10px;
+  line-height: 18px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+article.post-wrap .post-content .comment-more {
+  display: block;
+  margin: 5px 0;
+  outline: none;
+  padding: 0;
+  border: none;
+  color: #999;
+  background-color: #fff;
+}
+
+article.post-wrap .post-content .comment-more:hover {
+  color: #262626;
+}
+
+article.post-wrap .post-content .del-comment {
+  background: 0 0;
+  border: none;
+  color: #c7c7c7;
+  cursor: pointer;
+  float: right;
+  padding: 0;
+  margin-right: 12px;
+  width: 2em;
+}
+
+article.post-wrap .post-content .del-comment:hover {
+  color: #262626;
+}
+
+article.post-wrap .post-content .add-comment-wrap {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-top: 1px solid #efefef;
+  color: #999;
+}
+
+article.post-wrap .post-content .add-comment-wrap .comment-form {
+  height: 18px;
+  border: none;
+  outline: 0;
+}
+
+article.post-wrap .post-content .add-comment-wrap .add-comment-btn {
+  border: none;
+  width: 54px;
+  height: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #3897f0;
+  background-color: #fff;
+  float: right;
+}
