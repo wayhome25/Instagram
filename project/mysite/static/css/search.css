@@ -18,3 +18,8 @@
 .search-result-count .count {
   font-weight: 600;
 }
+
+.hot-tag-list {
+  font-size: 25px;
+  margin-top: 50px;
+}

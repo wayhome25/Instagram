@@ -28,6 +28,12 @@ Instagram
 <div class="search-header">
   {% if not posts %}
   <h1 class="search-result-title">#{{tag}}<br>태그 검색 결과가 없습니다.</h1>
+    <div class="hot-tag-list">
+    <h2 >인기 태그 리스트</h2>
+    {% for tag in tag_all|slice:":5" %}
+      <a href="/post/explore/tags/{{tag.name}}">#{{ tag.name }}</a>
+    {% endfor %}
+    </div>
   {% else %}
   <h1 class="search-result-title">#{{tag}} 검색결과</h1>
   <span class="search-result-count">게시물 <span class="count">{{ posts.paginator.count|intcomma }}개 </span></span>
