@@ -26,20 +26,4 @@
     <p class="signup-link">아이디가 없으신가요? <a href="{% url "signup" %}">회원가입</a></p>
   </div>
 </div>
-
-<ul>
-{% for provider in providers %}
-  <li>
-  {% if provider.social_app %}
-    <a href="{% provider_login_url provider.id %}">
-        {{ provider.name }}
-    </a>
-  {% else %}
-    <a>
-    Provider {{ provider.name }} 설정이 필요합니다.
-    </a>
-  {% endif %}
-  </li>
-{% endfor %}
-</ul>
 {% endblock %}

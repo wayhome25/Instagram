@@ -32,7 +32,7 @@
 - [사용자 정의 필터](https://wayhome25.github.io/django/2017/06/22/custom-template-filter/) - 해시태그 링크 구현
 - [django-imagekit](https://wayhome25.github.io/django/2017/05/11/image-thumbnail/) - 유저 업로드 media파일 관리
 - 프론트엔드 - SASS, JavaScript, jQuery, Bootstrap grid system 활용    
-- 그 밖의 [연습과정 TIL 기록](https://wayhome25.github.io/blog/tags/#학습과정)
+- 그 밖의 [연습과정 TIL 기록](https://wayhome25.github.io/#til-today-i-learned)
 
 ## 추가 연습예정
 - FBV(Function Based View)를 CBV(Class Based View)로 전환

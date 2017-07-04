@@ -4,16 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
-class SocialSignupForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['nickname']
-    def signup(self, request, user):
-        Profile.objects.create(
-            user = user,
-            nickname = self.cleaned_data['nickname'])
-
-
 class SignupForm(UserCreationForm):
     username = forms.CharField(label='사용자명', widget=forms.TextInput(attrs={
         'pattern': '[a-zA-Z0-9]+',
