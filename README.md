@@ -1,5 +1,5 @@
 # 인스타그램st  웹어플리케이션 구현
-> Django를 활용하여 인스타그램 기능을 가진 웹어플리케이션을 구현합니다.
+> 인스타그램 기능을 가진 웹어플리케이션을 구현하며 Django를 학습합니다.
 
 ## 결과물
 - [배포 사이트 바로가기](http://instagram-practice.tk/)
@@ -7,7 +7,7 @@
 
 ## 목표
 
-1. 동작하는 단위별로 commit을 추가한다. 코드 리뷰를 고려한 commit 메시지를 작성한다.
+1. 동작하는 단위별로 commit을 추가한다. 코드 리뷰를 고려한 commit 메시지를 작성한다. (지금까지의 [commit 이력](https://github.com/wayhome25/Instagram/commits/master))
 2. 필요한건 [Django 공식 문서](https://docs.djangoproject.com/en/1.11/), stackoverflow를 찾아보고 문제를 해결한다.
 3. 궁금한 코드는 [Django 소스코드](https://github.com/django/django/tree/1.10.6/django) 를 열어서 직접 읽어본다.
 4. 능동적으로 고민하고 가능한 스스로 코드를 짜본다. 비효율적이라도 직접 해보고, 다른 사람의 코드를 참고한다.
@@ -20,3 +20,21 @@
 - [사용자 정의 필터 (Custom Template Filter)를 활용하여 해시태그 링크 구현하기](https://wayhome25.github.io/django/2017/06/22/custom-template-filter/)
 - [Ajax / jQuery를 활용하여 새로고침 없이 좋아요 기능 구현하기](https://wayhome25.github.io/django/2017/06/25/django-ajax-like-button/)
 - [django-imagekit를 활용하여 유저가 업로드한 이미지를 수정](https://wayhome25.github.io/django/2017/05/11/image-thumbnail/)
+
+## 연습내용
+- 다양한 Model Relationship 활용 - 1:1, 1:ㅜN, M:N(through)
+- [쿼리셋 최적화](https://wayhome25.github.io/django/2017/06/20/selected_related_prefetch_related/) - 중복 DB쿼리 최소화 (select_related, prefetch_related 활용)
+- [sentry](https://sentry.io) - 배포 후 에러로깅
+- [Microsoft Azure](https://azure.microsoft.com/ko-kr/?&wt.mc_id=AID623284_SEM_ANFOP6Xj) 배포
+- [Ajax](https://wayhome25.github.io/django/2017/06/25/django-ajax-like-button/) 서버 비동기 통신 - 무한스크롤, 댓글, 좋아요 추가
+- [사용자 정의 필터](https://wayhome25.github.io/django/2017/06/22/custom-template-filter/) - 해시태그 링크 구현
+- [django-imagekit](https://wayhome25.github.io/django/2017/05/11/image-thumbnail/) - 유저 업로드 media파일 관리
+- 프론트엔드 - SASS, JavaScript, jQuery, Bootstrap grid system 활용    
+- 그 밖의 [연습과정 TIL 기록](https://wayhome25.github.io/blog/tags/#학습과정)
+
+## 추가 연습예정
+- FBV(Function Based View)를 CBV(Class Based View)로 전환
+- ASW를 활용한 배포
+- PostgreSQL 적용
+- Facebook 로그인 기능
+- 회원가입시 Email 인증 절차 추가
