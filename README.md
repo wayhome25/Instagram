@@ -22,10 +22,12 @@
 - [django-imagekit를 활용하여 유저가 업로드한 이미지를 수정](https://wayhome25.github.io/django/2017/05/11/image-thumbnail/)
 
 ## 연습내용
-- 다양한 Model Relationship 활용 - 1:1, 1:ㅜN, M:N(through)
+- 다양한 Model Relationship 활용 - 1:1, 1:N, M:N(through)
 - [쿼리셋 최적화](https://wayhome25.github.io/django/2017/06/20/selected_related_prefetch_related/) - 중복 DB쿼리 최소화 (select_related, prefetch_related 활용)
 - [sentry](https://sentry.io) - 배포 후 에러로깅
-- [Microsoft Azure](https://azure.microsoft.com/ko-kr/?&wt.mc_id=AID623284_SEM_ANFOP6Xj) 배포
+- PostgreSQL 연동
+- Microsoft Azure 배포
+- django-allauth 를 활용한 Facebook 로그인 기능
 - [Ajax](https://wayhome25.github.io/django/2017/06/25/django-ajax-like-button/) 서버 비동기 통신 - 무한스크롤, 댓글, 좋아요 추가
 - [사용자 정의 필터](https://wayhome25.github.io/django/2017/06/22/custom-template-filter/) - 해시태그 링크 구현
 - [django-imagekit](https://wayhome25.github.io/django/2017/05/11/image-thumbnail/) - 유저 업로드 media파일 관리
@@ -35,6 +37,6 @@
 ## 추가 연습예정
 - FBV(Function Based View)를 CBV(Class Based View)로 전환
 - ASW를 활용한 배포
-- PostgreSQL 적용
-- Facebook 로그인 기능
+- ~~PostgreSQL 적용~~
+- ~~Facebook 로그인 기능~~
 - 회원가입시 Email 인증 절차 추가
