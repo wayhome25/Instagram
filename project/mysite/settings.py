@@ -38,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
     'django_extensions',
     'debug_toolbar',
     'imagekit',
@@ -122,6 +129,21 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# allauth 설정추가
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend', #추가
+]
+
+SITE_ID = 1
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+SOCIALACCOUNT_ADAPTER = 'accounts.my_adapter.MyAdapter'
+# allauth 회원가입 form 오버라이딩 설정 
+# ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SocialSignupForm'
+# SOCIALACCOUNT_AUTO_SIGNUP = False
 
 
 # Internationalization

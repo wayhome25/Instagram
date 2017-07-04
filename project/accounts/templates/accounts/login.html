@@ -1,4 +1,5 @@
 {% extends "accounts/layout.html" %}
+{% load socialaccount %}
 
 {% block title %}
 로그인 | Instagram
@@ -12,10 +13,33 @@
       {% csrf_token %}
         {{ form.as_p }}
       <input class="submit_btn" type="submit" value="로그인">
+      {% for provider in providers %}
+      {% if provider.social_app %}
+      <a href="{% provider_login_url provider.id %}"><p class="submit_btn social_login_btn"><span class="fb-icon"></span>{{ provider.name }}으로 로그인</p></a>
+      {% else %}
+      Provider {{ provider.name }} 설정이 필요합니다.
+      {% endif %}
+      {% endfor %}
     </form>
   </div>
   <div class="shortcut">
     <p class="signup-link">아이디가 없으신가요? <a href="{% url "signup" %}">회원가입</a></p>
   </div>
 </div>
+
+<ul>
+{% for provider in providers %}
+  <li>
+  {% if provider.social_app %}
+    <a href="{% provider_login_url provider.id %}">
+        {{ provider.name }}
+    </a>
+  {% else %}
+    <a>
+    Provider {{ provider.name }} 설정이 필요합니다.
+    </a>
+  {% endif %}
+  </li>
+{% endfor %}
+</ul>
 {% endblock %}

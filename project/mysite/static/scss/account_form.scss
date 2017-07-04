@@ -23,7 +23,7 @@
 .form {
   background-color: #fff;
   border: 1px solid #e6e6e6;
-  padding: 0 40px 40px 40px;
+  padding: 0 40px 25px 40px;
   margin: 0 0 10px;
 
   .title {
@@ -52,6 +52,24 @@
     width: 100%;
     padding: 0;
     margin-top: 10px;
+  }
+  a {
+    text-decoration: none;
+  }
+  .social_login_btn {
+    text-align: center;
+    margin-top: 15px;
+  }
+  .fb-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url(/static/images/sprites/abfe22.png);
+    background-size: 413px 391px;
+    background-position: -249px -308px;
+    margin-right: 8px;
+    position: relative;
+    top: 3px;
   }
 }
 
