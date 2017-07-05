@@ -1,9 +1,0 @@
-{
-  "REPO_URL":"https://github.com/wayhome25/Instagram",
-  "PROJECT_NAME":"project/mysite",
-  "REMOTE_HOST":"insta-practice.tk",
-  "REMOTE_USER":"siwabada1",
-  "STATIC_ROOT":"staticfiles",
-  "STATIC_URL":"static",
-  "MEDIA_ROOT":"media"
-}

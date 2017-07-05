@@ -1,0 +1,4 @@
+-r common.txt
+
+psycopg2==2.7.1
+raven==6.1.0

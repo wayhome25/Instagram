@@ -1,0 +1,6 @@
+Django==1.10
+django-extensions==1.7.9
+django-allauth==0.31.0
+pilkit==2.0
+Pillow==4.1.1
+django-imagekit==4.0.1
