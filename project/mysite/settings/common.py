@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from os.path import abspath, dirname, join
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# settings.py 절대경로 기준으로 ROOT 디렉토리 경로 계산
+BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'b_4(!id8ro!1645n@ubnbvf1hbu93gaia0^_o%2$#hw-@but!v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # 배포용 prod.py 에서 오버라이딩
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] # 배포용 prod.py 에서 오버라이딩
 
 
 # Application definition
@@ -46,12 +48,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 
     'django_extensions',
-    'debug_toolbar',
     'imagekit',
     'accounts',
-    # 'dojo',
     'post',
-    'raven.contrib.django.raven_compat', #senty 에러로깅을 위한 추가
 ]
 
 MIDDLEWARE = [
@@ -62,12 +61,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
-
-INTERNAL_IPS = ["127.0.0.1"] # NOTE: djanog_debug_toolbar 용 설정 추가
 
 TEMPLATES = [
     {
@@ -93,23 +89,23 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'instagram',
-        'USER': 'siwabada',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'instagram',
+#         'USER': 'siwabada',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -141,7 +137,7 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 SOCIALACCOUNT_ADAPTER = 'accounts.my_adapter.MyAdapter'
-# allauth 회원가입 form 오버라이딩 설정 
+# allauth 회원가입 form 오버라이딩 설정
 # ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SocialSignupForm'
 # SOCIALACCOUNT_AUTO_SIGNUP = False
 
@@ -174,18 +170,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
-
-# sentry 에러로깅 설정
-import raven
-GIT_ROOT = os.path.join(BASE_DIR, '..')
-if os.path.exists(os.path.join(GIT_ROOT, '.git')):
-    release = raven.fetch_git_sha(GIT_ROOT) # 현재 최근 커밋해시 획득
-else:
-    release = 'dev'
-
-RAVEN_CONFIG = {
-    'release': release,
-    'dsn': 'https://03f215bab74642a0af8158ea7b29ea74:08a7789ebae04b8eb1e4641f52bbced2@sentry.io/186918',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-}
