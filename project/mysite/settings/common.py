@@ -17,7 +17,6 @@ from os.path import abspath, dirname, join
 # settings.py 절대경로 기준으로 ROOT 디렉토리 경로 계산
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -25,10 +24,9 @@ BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 SECRET_KEY = 'b_4(!id8ro!1645n@ubnbvf1hbu93gaia0^_o%2$#hw-@but!v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # 배포용 prod.py 에서 오버라이딩
+DEBUG = True  # 배포용 prod.py 에서 오버라이딩
 
-ALLOWED_HOSTS = ['*'] # 배포용 prod.py 에서 오버라이딩
-
+ALLOWED_HOSTS = ['*']  # 배포용 prod.py 에서 오버라이딩
 
 # Application definition
 
@@ -85,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -129,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # allauth 설정추가
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend', #추가
+    'allauth.account.auth_backends.AuthenticationBackend',  # 추가
 ]
 
 SITE_ID = 1
@@ -154,7 +151,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

@@ -14,7 +14,7 @@ class SignupForm(UserCreationForm):
     picture = forms.ImageField(label='프로필 사진', required=False)
 
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields + ('email', ) # NOTE: User 모델의 email field 사용
+        fields = UserCreationForm.Meta.fields + ('email',)  # NOTE: User 모델의 email field 사용
 
     # NOTE: clean_<필드명> 메서드를 활용하여, is_valid() 메소드 실행시 nickname 필드에 대한 유효성 검증 실행
     def clean_nickname(self):
@@ -23,11 +23,12 @@ class SignupForm(UserCreationForm):
             raise forms.ValidationError('이미 존재하는 닉네임 입니다.')
         return nickname
 
+    @property
     def clean_email(self):
         email = self.cleaned_data.get('email')
         User = get_user_model()
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('사용중인 이메일 입니다.') # NOTE: 유효성 검사 에러메시지 생성
+            raise forms.ValidationError('사용중인 이메일 입니다.')  # NOTE: 유효성 검사 에러메시지 생성
         return email
 
     def clean_picture(self):
@@ -39,9 +40,9 @@ class SignupForm(UserCreationForm):
     def save(self):
         user = super().save()
         Profile.objects.create(
-            user = user,
-            nickname = self.cleaned_data['nickname'],
-            picture = self.cleaned_data['picture'],)
+            user=user,
+            nickname=self.cleaned_data['nickname'],
+            picture=self.cleaned_data['picture'], )
         return user
 
 
@@ -49,7 +50,7 @@ class ProfileForm(forms.ModelForm):
     about = forms.CharField(label='자기소개', required=False, widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 50,
-        'placeholder': '소개는 150자 까지 등록 가능합니다',}))
+        'placeholder': '소개는 150자 까지 등록 가능합니다', }))
 
     class Meta:
         model = Profile

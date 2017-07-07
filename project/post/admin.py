@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import Textarea
 from django.contrib import admin
 from .models import Comment, Post, Tag, Like
 
@@ -27,10 +26,12 @@ class PostAdmin(admin.ModelAdmin):
     form = PostForm
     inlines = [LikeInline, CommentInline]
 
+
     def nickname(request, post):
         return post.author.profile.nickname
 
     list_select_related = ['author__profile']
+
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):

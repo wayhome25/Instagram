@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'post/', include('post.urls', namespace='post')),
-    url(r'^$', lambda r: redirect('post:post_list'), name='root'), # NOTE: lambda 함수를 통한 리다이렉트
+    url(r'^$', lambda r: redirect('post:post_list'), name='root'),  # NOTE: lambda 함수를 통한 리다이렉트
 ]
 
 # NOTE: serving media files uploaded by a user during development
@@ -33,6 +33,7 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # NOTE: debug_toolbar용 url 설정
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ]

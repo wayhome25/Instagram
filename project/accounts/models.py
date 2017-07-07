@@ -13,19 +13,20 @@ def user_path(instance, filename):
     extension = filename.split('.')[-1]
     return 'accounts/{}/{}.{}'.format(instance.user.username, pid, extension)
 
+
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     nickname = models.CharField('닉네임', max_length=30, unique=True)
     follow_set = models.ManyToManyField('self',
                                         blank=True,
                                         through='Relation',
-                                        symmetrical=False,)
-    picture = ProcessedImageField(upload_to = user_path,
-                                processors = [ResizeToFill(150, 150)],
-                                format='JPEG',
-                                options={'quality': 90},
-                                blank=True,
-                                )
+                                        symmetrical=False, )
+    picture = ProcessedImageField(upload_to=user_path,
+                                  processors=[ResizeToFill(150, 150)],
+                                  format='JPEG',
+                                  options={'quality': 90},
+                                  blank=True,
+                                  )
     about = models.CharField(max_length=150, blank=True)
     GENDER_CHOICES = (
         ('선택 안 함', '선택 안 함'),
@@ -58,6 +59,7 @@ class Profile(models.Model):
 
     def is_following(self, user):
         return user in self.get_following
+
 
 class Relation(models.Model):
     from_user = models.ForeignKey(Profile, related_name='follow_user')

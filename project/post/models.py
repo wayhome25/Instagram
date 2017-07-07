@@ -28,7 +28,7 @@ class Post(models.Model):
     like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                            blank=True,
                                            related_name='like_user_set',
-                                           through='Like') # post.like_set 으로 접근 가능
+                                           through='Like')  # post.like_set 으로 접근 가능
 
     class Meta:
         ordering = ['-created_at']
@@ -42,7 +42,7 @@ class Post(models.Model):
 
         for t in tags:
             tag, tag_created = Tag.objects.get_or_create(name=t)
-            self.tag_set.add(tag) #NOTE: ManyToManyField 에 인스턴스 추가
+            self.tag_set.add(tag)  # NOTE: ManyToManyField 에 인스턴스 추가
 
     @property
     def like_count(self):
@@ -69,6 +69,7 @@ class Like(models.Model):
         unique_together = (
             ('user', 'post')
         )
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)

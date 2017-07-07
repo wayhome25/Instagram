@@ -4,13 +4,14 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['insta-practice.tk']
 
-INSTALLED_APPS = ['raven.contrib.django.raven_compat',] #senty 에러로깅을 위한 추가
+INSTALLED_APPS = ['raven.contrib.django.raven_compat', ]  # senty 에러로깅을 위한 추가
 
 # sentry 에러로깅 설정
 import raven
+
 GIT_ROOT = os.path.join(BASE_DIR, '..')
 if os.path.exists(os.path.join(GIT_ROOT, '.git')):
-    release = raven.fetch_git_sha(GIT_ROOT) # 현재 최근 커밋해시 획득
+    release = raven.fetch_git_sha(GIT_ROOT)  # 현재 최근 커밋해시 획득
 else:
     release = 'dev'
 

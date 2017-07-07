@@ -16,8 +16,8 @@ from .models import Profile, Relation
 
 def login(request):
     providers = []
-    for provider in get_providers(): #settings/INSTALLED_APPS 내에서 활성화된 목록
-    # social_app속성은 provider에는 없는 속성입니다.
+    for provider in get_providers():  # settings/INSTALLED_APPS 내에서 활성화된 목록
+        # social_app속성은 provider에는 없는 속성입니다.
         try:
             # 실제 provider 별 Client id/secret 이 등록이 되어 있는가?
             provider.social_app = SocialApp.objects.get(provider=provider.id, sites=settings.SITE_ID)
@@ -26,13 +26,14 @@ def login(request):
         providers.append(provider)
 
     return auth_login(request,
-        template_name='accounts/login.html',
-        extra_context={'providers': providers})
+                      template_name='accounts/login.html',
+                      extra_context={'providers': providers})
+
 
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST, request.FILES)
-        if form.is_valid(): # clean_<필드명> 메소드 호출
+        if form.is_valid():  # clean_<필드명> 메소드 호출
             user = form.save()
             return redirect('login')
     else:
@@ -92,11 +93,11 @@ def follow(request):
     relation, created = Relation.objects.get_or_create(from_user=from_user, to_user=to_user)
 
     if created:
-        message =  '팔로우 시작!'
+        message = '팔로우 시작!'
         status = 1
     else:
         relation.delete()
-        message =  '팔로우 취소'
+        message = '팔로우 취소'
         status = 0
 
     context = {
