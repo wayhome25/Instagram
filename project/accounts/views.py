@@ -43,11 +43,6 @@ def signup(request):
     })
 
 
-# @login_required
-# def profile(request):
-#     return render(request, 'accounts/profile.html')
-
-
 @login_required
 def password_change(request):
     if request.method == 'POST':

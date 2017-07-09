@@ -23,7 +23,6 @@ class SignupForm(UserCreationForm):
             raise forms.ValidationError('이미 존재하는 닉네임 입니다.')
         return nickname
 
-    @property
     def clean_email(self):
         email = self.cleaned_data.get('email')
         User = get_user_model()
