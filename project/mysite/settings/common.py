@@ -21,7 +21,8 @@ BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b_4(!id8ro!1645n@ubnbvf1hbu93gaia0^_o%2$#hw-@but!v'
+SECRET_KEY = os.environ["INSTA_SECRET_KEY"]
+# SECRET_KEY = 'b_4(!id8ro!1645n@ubnbvf1hbu93gaia0^_o%2$#hw-@but!v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # 배포용 prod.py 에서 오버라이딩
