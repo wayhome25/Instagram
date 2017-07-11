@@ -4,7 +4,7 @@
 dojo/
 *.ipynb
 .idea/
-
+secrets.json
 ### Database ###
 *.accdb
 *.db
