@@ -37,4 +37,5 @@
   - [sentry](https://sentry.io) - 배포 후 에러로깅
   - PostgreSQL 연동
   - 실행 환경에 따른 (개발/배포) requirements.txt, settings.py 파일 분리
+  - SECRET_KEY 설정 분리 (환경변수패턴 / 비밀파일패턴)
 - 그 밖의 [연습과정 TIL 기록](https://wayhome25.github.io/#til-today-i-learned)
