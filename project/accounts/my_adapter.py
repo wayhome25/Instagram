@@ -7,6 +7,6 @@ class MyAdapter(DefaultSocialAccountAdapter):
     def save_user(self, request, sociallogin, form=None):
         user = super(MyAdapter, self).save_user(request, sociallogin)
         Profile.objects.create(
-            user=user,
-            nickname=user.username)
+            user = user,
+            nickname = user.username)
         user.save()

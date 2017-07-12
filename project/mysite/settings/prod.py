@@ -2,9 +2,7 @@ from .common import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['insta-practice.tk']
-
-INSTALLED_APPS = ['raven.contrib.django.raven_compat', ]  # senty 에러로깅을 위한 추가
+INSTALLED_APPS += ['raven.contrib.django.raven_compat', ]  # senty 에러로깅을 위한 추가
 
 # sentry 에러로깅 설정
 import raven
