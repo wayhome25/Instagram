@@ -2,8 +2,7 @@
 > 인스타그램 기능을 가진 웹어플리케이션을 구현하며 Django를 학습합니다.
 
 ## 결과물
-- [배포 사이트 바로가기](http://instagram-practice.tk/)
-- [Microsoft Azure](https://azure.microsoft.com/ko-kr/?&wt.mc_id=AID623284_SEM_ANFOP6Xj) 를 활용하여 배포
+- [배포 사이트 바로가기](http://hyunjoolee.pythonanywhere.com/post/)
 
 ## 목표
 
@@ -32,7 +31,7 @@
   - [Ajax](https://wayhome25.github.io/django/2017/06/25/django-ajax-like-button/) 서버 비동기 통신 - 무한스크롤, 댓글, 좋아요 추가
   - SASS, JavaScript, jQuery, Bootstrap grid system 활용    
 - 배포
-  - Microsoft Azure 를 활용한 배포 연습
+  - [Microsoft Azure](https://azure.microsoft.com/ko-kr/?&wt.mc_id=AID623284_SEM_ANFOP6Xj) 를 활용한 배포 연습
   - AWS Elastic Beanstalk를 활용한 배포 연습
   - [sentry](https://sentry.io) - 배포 후 에러로깅
   - PostgreSQL 연동
